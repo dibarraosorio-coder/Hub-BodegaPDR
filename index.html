@@ -227,7 +227,6 @@
   tr.stagnant { background: rgba(248, 113, 113, 0.05); }
   tr.stagnant:hover { background: rgba(248, 113, 113, 0.1); }
   
-  /* NUEVO: Fila amarilla para 3 meses sin movimiento */
   tr.warning-row { background: rgba(251, 146, 60, 0.05); }
   tr.warning-row:hover { background: rgba(251, 146, 60, 0.1); }
   
@@ -288,7 +287,7 @@
   .pl-table tr:focus-within { background: var(--surface2) !important; box-shadow: inset 3px 0 0 var(--accent); }
   .pl-table tr:hover { background: var(--bg); }
   
-  /* NUEVO: ESTILOS PARA PRODUCTOS DESCONTINUADOS */
+  /* ESTILOS PARA PRODUCTOS DESCONTINUADOS */
   .discontinued-row { opacity: 0.4; pointer-events: auto; }
   .discontinued-row td { color: var(--text-muted) !important; }
   .discontinued-row .pl-qty-input { opacity: 0.5; background: var(--surface2); cursor: not-allowed; }
@@ -357,11 +356,12 @@
           </div>
           <div class="divider-v"></div>
           <div style="display:flex; gap:4px;">
-              <label for="excel-upload-admin" class="btn-upload" title="Cargar archivo Administradora">
-                  📥 Cargar ADM <input type="file" id="excel-upload-admin" accept=".xlsx, .xls" style="display:none" onclick="this.value=null;">
+              <!-- ATENCIÓN: ARCHIVOS DE CARGA BLINDADOS Y SEGUROS -->
+              <label class="btn-upload" title="Cargar archivo Administradora">
+                  📥 Cargar ADM <input type="file" id="excel-upload-admin" accept=".xlsx, .xls" style="display:none;">
               </label>
-              <label for="excel-upload-inmob" class="btn-upload" title="Cargar archivo Inmobiliaria">
-                  📥 Cargar INM <input type="file" id="excel-upload-inmob" accept=".xlsx, .xls" style="display:none" onclick="this.value=null;">
+              <label class="btn-upload" title="Cargar archivo Inmobiliaria">
+                  📥 Cargar INM <input type="file" id="excel-upload-inmob" accept=".xlsx, .xls" style="display:none;">
               </label>
               <button class="btn-upload" onclick="fetchOCsFromGoogle()" title="Descargar OCs en tránsito directamente desde Google Sheets" style="background: var(--sys-orange); color: #fff; border-color: var(--sys-orange); border:none;">
                   🔄 Sincronizar OC
@@ -957,7 +957,7 @@ function getDiasBar(dias) {
   const capped = Math.min(dias, 365), pct = (capped / 365) * 100;
   let color = 'var(--sys-green)';
   if (dias > 365) color = 'var(--text-tertiary)'; else if (dias < 30) color = 'var(--sys-red)'; else if (dias < 90) color = 'var(--sys-orange)'; else if (dias < 180) color = 'var(--sys-yellow)';
-  return `<div class="dias-cell"><span class="num">${Math.round(dias) === 999 ? '999+' : Math.round(dias)}</span><div class="dias-bar"><div class="dias-bar-fill" style="width:${pct}%;background:${color}"></div></div></div>`;
+  return `<div class="dias-cell"><span class="num">${Math.round(dias) === 999 ? '999+' : Math.round(dias)}</span><div class="dias-bar"><div class="dias-bar-fill" style="width:${pct}\%;background:${color}"></div></div></div>`;
 }
 
 /* =====================================================================
@@ -1014,11 +1014,6 @@ function clearAllData() {
         document.getElementById('upload-status').innerHTML = '<span style="color:var(--text-muted)">Datos borrados. Esperando archivo...</span>';
         document.getElementById('main-content').classList.add('hidden');
         document.getElementById('welcome-message').classList.remove('hidden');
-        
-        const fileAdmin = document.getElementById('excel-upload-admin');
-        if (fileAdmin) fileAdmin.value = ''; 
-        const fileInmob = document.getElementById('excel-upload-inmob');
-        if (fileInmob) fileInmob.value = '';
     }
 }
 
@@ -1393,7 +1388,7 @@ function renderPieChart(canvasId, labels, data, colors, hideLegend = false) {
                       const descCompleta = p ? p.descripcion : ctx.label;
                       let valStr = ' ' + fmt(ctx.raw) + ' un.';
                       if (canvasId === 'chart-val' || canvasId === 'chart-abc') valStr = ' $' + fmt(ctx.raw);
-                      return `${descCompleta}: ${valStr}`; 
+                      return `${descCompleta}:${valStr}`; 
                   } 
               } 
           } 
@@ -1513,7 +1508,7 @@ function updateDashboardKPIs(processedResult) {
   PROCESSED_DATA = processedResult.finalData;
   const { minDate, maxDate, timelineMap } = processedResult;
 
-  if (minDate && maxDate && PROCESSED_DATA.length > 0) { document.getElementById('header-period').textContent = `Período consultado: ${minDate.toLocaleDateString('es-CL')} – ${maxDate.toLocaleDateString('es-CL')}`; } 
+  if (minDate && maxDate && PROCESSED_DATA.length > 0) { document.getElementById('header-period').textContent = `Período consultado: ${minDate.toLocaleDateString('es-CL')} –${maxDate.toLocaleDateString('es-CL')}`; } 
   else { document.getElementById('header-period').textContent = `No hay datos en el rango/filtros seleccionados.`; }
 
   let valorTotal = 0, valorEstancado = 0; let salidasTotal = 0, comprasTotal = 0; let estancadosCount = 0, criticosCount = 0;
@@ -1553,20 +1548,20 @@ function updateDashboardKPIs(processedResult) {
 
   // Chart: Pareto
   const paretoData = [...PROCESSED_DATA].sort((a,b) => (b.consumos_negativos * b.precio_unitario) - (a.consumos_negativos * a.precio_unitario)).slice(0, 50).filter(p => p.consumos_negativos > 0);
-  const paretoLabels = paretoData.map(p => `[${p.codigo}] ${truncateString(p.descripcion, 20)}`);
+  const paretoLabels = paretoData.map(p => `[${p.codigo}]${truncateString(p.descripcion, 20)}`);
   const paretoBars = paretoData.map(p => p.consumos_negativos * p.precio_unitario);
   const paretoTotal = paretoBars.reduce((a,b) => a+b, 0);
   let acc = 0; const paretoLine = paretoBars.map(v => { acc += v; return (acc/paretoTotal)*100; });
   renderParetoChart('chart-pareto', paretoLabels, paretoBars, paretoLine, getCssVar('--surface2'), getCssVar('--accent'));
 
-  const topQty = [...PROCESSED_DATA].sort((a,b) => b.consumos_negativos - a.consumos_negativos).slice(0, 10); renderPieChart('chart-qty', topQty.map(p => `[${p.codigo}] ${truncateString(p.descripcion, 30)}`), topQty.map(p => p.consumos_negativos), PIE_COLORS);
-  const topCost = [...PROCESSED_DATA].sort((a,b) => (b.consumos_negativos * b.precio_unitario) - (a.consumos_negativos * a.precio_unitario)).slice(0, 10); renderPieChart('chart-val', topCost.map(p => `[${p.codigo}] ${truncateString(p.descripcion, 30)}`), topCost.map(p => p.consumos_negativos * p.precio_unitario), PIE_COLORS);
-  const topVs = [...PROCESSED_DATA].sort((a,b) => (b.total_comprado + b.consumos_negativos) - (a.total_comprado + a.consumos_negativos)).slice(0, 10); renderBarChart('chart-flow', topVs.map(p => truncateString(`[${p.codigo}] ${p.descripcion}`, 25)), topVs.map(p => p.total_comprado), 'Comprado', getCssVar('--text-tertiary'), topVs.map(p => p.consumos_negativos), 'Salidas', getCssVar('--accent'));
+  const topQty = [...PROCESSED_DATA].sort((a,b) => b.consumos_negativos - a.consumos_negativos).slice(0, 10); renderPieChart('chart-qty', topQty.map(p => `[${p.codigo}]${truncateString(p.descripcion, 30)}`), topQty.map(p => p.consumos_negativos), PIE_COLORS);
+  const topCost = [...PROCESSED_DATA].sort((a,b) => (b.consumos_negativos * b.precio_unitario) - (a.consumos_negativos * a.precio_unitario)).slice(0, 10); renderPieChart('chart-val', topCost.map(p => `[${p.codigo}]${truncateString(p.descripcion, 30)}`), topCost.map(p => p.consumos_negativos * p.precio_unitario), PIE_COLORS);
+  const topVs = [...PROCESSED_DATA].sort((a,b) => (b.total_comprado + b.consumos_negativos) - (a.total_comprado + a.consumos_negativos)).slice(0, 10); renderBarChart('chart-flow', topVs.map(p => truncateString(`[${p.codigo}]${p.descripcion}`, 25)), topVs.map(p => p.total_comprado), 'Comprado', getCssVar('--text-tertiary'), topVs.map(p => p.consumos_negativos), 'Salidas', getCssVar('--accent'));
   
   const tlLabelsRaw = Array.from(timelineMap.keys()).sort(); 
   const tlLabels = tlLabelsRaw.map(k => {
       if (k.length === 10) { const p = k.split('-'); return `${p[2]}/${p[1]}`; } 
-      else if (k.length === 7) { const p = k.split('-'); return `${SHORT_MESES[parseInt(p[1])-1]} ${p[0].slice(2)}`; }
+      else if (k.length === 7) { const p = k.split('-'); return `${SHORT_MESES[parseInt(p[1])-1]}${p[0].slice(2)}`; }
       return k;
   });
   const tlData = tlLabelsRaw.map(k => timelineMap.get(k)); 
@@ -1911,7 +1906,7 @@ function sortTableData(data) {
 function renderTable() {
   const data = sortTableData(getLocalFiltered());
   const tbody = document.getElementById('tbody'); const empty = document.getElementById('empty');
-  document.getElementById('table-info-txt').textContent = `Mostrando ${data.length} de ${PROCESSED_DATA.length} productos procesados`;
+  document.getElementById('table-info-txt').textContent = `Mostrando ${data.length} de${PROCESSED_DATA.length} productos procesados`;
   if (data.length === 0) { empty.style.display = ''; tbody.innerHTML = ''; return; }
   empty.style.display = 'none';
   tbody.innerHTML = data.map(p => {
@@ -1954,7 +1949,7 @@ function exportToExcelListado() {
     let aoa = [
         ["REPORTE DE INVENTARIO Y ALERTAS LOGÍSTICAS - HUB BODEGA PAV"],
         ["Centro de Costo:", CURRENT_EMPRESA === 'ADMIN' ? 'Administradora Los Parques' : 'Inmobiliaria Los Parques'],
-        ["Filtros aplicados:", `Familia: ${document.getElementById('lst-familia').value} | Proveedor: ${document.getElementById('lst-proveedor').value} | Movimiento: ${document.getElementById('lst-movimiento').value}`],
+        ["Filtros aplicados:", `Familia: ${document.getElementById('lst-familia').value} | Proveedor: ${document.getElementById('lst-proveedor').value} \vert{} Movimiento:${document.getElementById('lst-movimiento').value}`],
         []
     ];
     
@@ -2004,7 +1999,7 @@ function renderComparadorList(searchText = '') {
     const selectedProds = PROCESSED_DATA.filter(p => selectedSet.has(p.codigo)); const finalRender = [...selectedProds, ...toRender];
     list.innerHTML = finalRender.map(p => {
         const isChecked = selectedSet.has(p.codigo) ? 'checked' : '';
-        return `<label class="dropdown-item"><input type="checkbox" value="${p.codigo}" ${isChecked} onchange="handleComparadorChange(this)"><span>[${p.codigo}] ${truncateString(p.descripcion, 45)}</span></label>`;
+        return `<label class="dropdown-item"><input type="checkbox" value="${p.codigo}" ${isChecked} onchange="handleComparadorChange(this)"><span>[${p.codigo}]${truncateString(p.descripcion, 45)}</span></label>`;
     }).join('');
 }
 function updateComparadorDropdown() {
@@ -2022,7 +2017,7 @@ function updateComparador() {
     wrapper.style.display = 'block'; emptyMsg.style.display = 'none';
     
     const dataToCompare = PROCESSED_DATA.filter(p => SELECTED_COMPARADOR.includes(p.codigo));
-    const labels = dataToCompare.map(p => truncateString(`[${p.codigo}] ${p.descripcion}`, 35));
+    const labels = dataToCompare.map(p => truncateString(`[${p.codigo}]${p.descripcion}`, 35));
     const dataStock = dataToCompare.map(p => p.stock_actual); const dataSalidas = dataToCompare.map(p => p.consumos_negativos); const dataCompras = dataToCompare.map(p => p.total_comprado);
     
     renderPieChart('comp-stock', labels, dataStock, PIE_COLORS, false); renderPieChart('comp-salidas', labels, dataSalidas, PIE_COLORS, false); renderPieChart('comp-compras', labels, dataCompras, PIE_COLORS, false);
@@ -2081,6 +2076,7 @@ function updateProveedorDropdown() {
     });
 
     const provSelect = document.getElementById('pl-proveedor-filter');
+    if(!provSelect) return;
     const currentVal = provSelect.value;
     
     provSelect.innerHTML = '<option value="TODOS">Todos los proveedores</option>' + 
@@ -2101,10 +2097,10 @@ function initPlannerDropdowns() {
     });
 
     const pSelect = document.getElementById('pl-parque-select');
-    pSelect.innerHTML = '<option value="TODOS">Todos los parques</option>' + Array.from(parques).sort().map(p => `<option value="${p}">${p}</option>`).join('');
+    if(pSelect) pSelect.innerHTML = '<option value="TODOS">Todos los parques</option>' + Array.from(parques).sort().map(p => `<option value="${p}">${p}</option>`).join('');
 
     const wSelect = document.getElementById('pl-warehouse-select');
-    wSelect.innerHTML = '<option value="TODAS">Todas las bodegas</option>' + Array.from(almacenes).sort().map(w => `<option value="${w}">${w}</option>`).join('');
+    if(wSelect) wSelect.innerHTML = '<option value="TODAS">Todas las bodegas</option>' + Array.from(almacenes).sort().map(w => `<option value="${w}">${w}</option>`).join('');
 
     const listFam = document.getElementById('list-pl-familia');
     if (listFam) {
@@ -2114,57 +2110,27 @@ function initPlannerDropdowns() {
 
     const sortedMonths = Array.from(monthsSet).sort();
     const dStart = document.getElementById('pl-date-start'); const dEnd = document.getElementById('pl-date-end');
-    const monthOptions = sortedMonths.map(m => `<option value="${m}">${MESES_MAP[m.slice(-2)]} ${m.substring(0,4)}</option>`).join('');
-    dStart.innerHTML = monthOptions; dEnd.innerHTML = monthOptions;
+    const monthOptions = sortedMonths.map(m => `<option value="${m}">${MESES_MAP[m.slice(-2)]}${m.substring(0,4)}</option>`).join('');
+    if(dStart) dStart.innerHTML = monthOptions; 
+    if(dEnd) dEnd.innerHTML = monthOptions;
 
     if(sortedMonths.length > 0) {
-        dEnd.value = sortedMonths[sortedMonths.length - 1];
-        dStart.value = sortedMonths[Math.max(0, sortedMonths.length - 6)];
+        if(dEnd) dEnd.value = sortedMonths[sortedMonths.length - 1];
+        if(dStart) dStart.value = sortedMonths[Math.max(0, sortedMonths.length - 6)];
     }
 
     updateProveedorDropdown();
 }
 
-document.getElementById('pl-parque-select').addEventListener('change', (e) => {
-    const p = e.target.value; const wSelect = document.getElementById('pl-warehouse-select'); const almacenes = new Set();
-    RAW_EXCEL_ROWS.forEach(row => {
-        const almacen = String(getCol(row, COL_ALMACEN) || '').trim().toUpperCase();
-        if(!almacen) return;
-        if(p === 'TODOS' || almacen.startsWith(p)) almacenes.add(almacen);
-    });
-    wSelect.innerHTML = '<option value="TODAS">Todas las bodegas</option>' + Array.from(almacenes).sort().map(w => `<option value="${w}">${w}</option>`).join('');
-    extractPlannerDataFromGlobal();
-});
-
-// NUEVO: Función para alternar el estado de Descontinuado en memoria
-function toggleDiscontinued(codigo) {
-    const key = CURRENT_EMPRESA === 'ADMIN' ? 'logistic_discontinued_ADMIN' : 'logistic_discontinued_INMOB';
-    
-    if (PLANNER_DISCONTINUED[codigo]) {
-        delete PLANNER_DISCONTINUED[codigo];
-    } else {
-        PLANNER_DISCONTINUED[codigo] = true;
-        
-        // Si se descontinúa, limpiamos la cantidad solicitada para no generar falsos pedidos
-        const qKey = `PL__${codigo}`;
-        if (PLANNER_DATA.requestedQtys[qKey]) {
-            delete PLANNER_DATA.requestedQtys[qKey];
-            const storageKeyQty = CURRENT_EMPRESA === 'ADMIN' ? 'logistic_planner_qtys_ADMIN' : 'logistic_planner_qtys_INMOB';
-            localStorage.setItem(storageKeyQty, JSON.stringify(PLANNER_DATA.requestedQtys));
-        }
-    }
-    
-    localStorage.setItem(key, JSON.stringify(PLANNER_DISCONTINUED));
-    processAndRenderPlanner();
-}
-
 function extractPlannerDataFromGlobal() {
     if(!RAW_EXCEL_ROWS || !RAW_EXCEL_ROWS.length) return;
 
-    const plParque = document.getElementById('pl-parque-select').value;
-    const plWh = document.getElementById('pl-warehouse-select').value;
-    const startMonth = document.getElementById('pl-date-start').value;
-    const endMonth = document.getElementById('pl-date-end').value;
+    const plParque = document.getElementById('pl-parque-select') ? document.getElementById('pl-parque-select').value : 'TODOS';
+    const plWh = document.getElementById('pl-warehouse-select') ? document.getElementById('pl-warehouse-select').value : 'TODAS';
+    const startMonth = document.getElementById('pl-date-start') ? document.getElementById('pl-date-start').value : '';
+    const endMonth = document.getElementById('pl-date-end') ? document.getElementById('pl-date-end').value : '';
+
+    if(!startMonth || !endMonth) return;
 
     const targetMonths = generateMonthRange(startMonth, endMonth);
     PLANNER_DATA.months = targetMonths;
@@ -2175,7 +2141,6 @@ function extractPlannerDataFromGlobal() {
         const code = String(getCol(row, COL_CODIGO) || '').trim(); if (!code) return;
         const almacen = String(getCol(row, COL_ALMACEN) || 'BOD-GENERAL').trim();
         
-        // Filtro estructural para la extracción
         if(plParque !== 'TODOS' && !almacen.startsWith(plParque)) return;
         if(plWh !== 'TODAS' && almacen !== plWh) return;
 
@@ -2195,18 +2160,15 @@ function extractPlannerDataFromGlobal() {
         
         map[key].stock += qty;
 
-        // Capturar proveedores históricos para este SKU
         if (tipoMov.includes('COMPRA') || tipoDoc.includes('RECEPCIÓN') || tipoDoc.includes('RECEPCION')) {
             const comp = String(getCol(row, COL_COMP) || '').trim().toUpperCase();
             if (comp && comp !== 'SIN ESPECIFICAR') map[key].proveedoresHist.add(comp);
         }
 
-        // Capturar Fecha de Recepción
         if (tipoDoc.includes('RECEPCIÓN DE COMPRA') || tipoDoc.includes('RECEPCION DE COMPRA')) {
             if (dateRaw) map[key].receiptDates.push(dateRaw);
         }
 
-        // Histórico Mensual Consumos
         if ((naturaleza === 'CONSUMO' || tipoMov === 'VENTA' || tipoMov.includes('NEGATIVO') || tipoMov === 'CONSUMO') && dateRaw) {
             const rowMonth = `${dateRaw.getFullYear()}-${String(dateRaw.getMonth()+1).padStart(2,'0')}`;
             if (map[key].monthlyConsumptions[rowMonth] !== undefined) {
@@ -2215,7 +2177,6 @@ function extractPlannerDataFromGlobal() {
         }
     });
 
-    // INYECTAR FANTASMAS DESDE OC (Mismo filtro estructural)
     Object.keys(PENDING_ORDERS).forEach(code => {
         if (!map[code]) {
             let pBodega = 'BOD-GENERAL';
@@ -2243,18 +2204,18 @@ function extractPlannerDataFromGlobal() {
 }
 
 function getPlannerEvaluatedData() {
-    const query = document.getElementById('pl-search-bar').value.toLowerCase(); 
-    const selectedStock = document.getElementById('pl-stock-filter').value; 
-    const selectedStatus = document.getElementById('pl-status-filter').value;
-    const suggestMonths = parseInt(document.getElementById('pl-suggest-months').value) || 3;
-    const safetyMonths = parseInt(document.getElementById('pl-safety-stock').value) || 0;
+    const sb = document.getElementById('pl-search-bar');
+    const query = sb ? sb.value.toLowerCase() : ''; 
     
-    // Filtros Nuevos
-    const selectedProveedor = document.getElementById('pl-proveedor-filter').value;
-    const selectedOC = document.getElementById('pl-oc-filter').value;
-    const visibilityFilter = document.getElementById('pl-visibility-filter').value;
+    const selectedStock = document.getElementById('pl-stock-filter') ? document.getElementById('pl-stock-filter').value : 'TODOS'; 
+    const selectedStatus = document.getElementById('pl-status-filter') ? document.getElementById('pl-status-filter').value : 'TODOS';
+    const suggestMonths = parseInt(document.getElementById('pl-suggest-months') ? document.getElementById('pl-suggest-months').value : '3') || 3;
+    const safetyMonths = parseInt(document.getElementById('pl-safety-stock') ? document.getElementById('pl-safety-stock').value : '0') || 0;
+    
+    const selectedProveedor = document.getElementById('pl-proveedor-filter') ? document.getElementById('pl-proveedor-filter').value : 'TODOS';
+    const selectedOC = document.getElementById('pl-oc-filter') ? document.getElementById('pl-oc-filter').value : 'TODOS';
+    const visibilityFilter = document.getElementById('pl-visibility-filter') ? document.getElementById('pl-visibility-filter').value : 'OCULTAR';
 
-    // Multi-Select para Familias
     const famCheckboxes = document.querySelectorAll('#list-pl-familia input[type="checkbox"]:checked');
     const selectedFams = Array.from(famCheckboxes).map(cb => cb.value);
 
@@ -2270,7 +2231,6 @@ function getPlannerEvaluatedData() {
             if(!matchesFam) return;
         }
         
-        // Verificación de descontinuado
         const isDisc = PLANNER_DISCONTINUED[p.code] === true;
         if (visibilityFilter === 'OCULTAR' && isDisc) return;
 
@@ -2284,19 +2244,14 @@ function getPlannerEvaluatedData() {
         }
         p.enTransito = enTransito;
 
-        // FILTRO: OCs Pendientes
         if (selectedOC === 'CON_OC' && p.enTransito === 0) return;
         if (selectedOC === 'SIN_OC' && p.enTransito > 0) return;
 
-        // FILTRO: Proveedor
         if (selectedProveedor !== 'TODOS') {
             let hasProveedor = false;
-            // Verificar en tránsito
             if (pProveedoresOC.has(selectedProveedor)) hasProveedor = true;
-            // Verificar en histórico
             if (!hasProveedor && p.proveedoresHist && p.proveedoresHist.has(selectedProveedor)) hasProveedor = true;
-            
-            if (!hasProveedor) return; // Omitir si no le compramos a este proveedor
+            if (!hasProveedor) return; 
         }
 
         let sum = 0;
@@ -2305,7 +2260,6 @@ function getPlannerEvaluatedData() {
         p.avg = Math.ceil(sum / numMonths);
         let sugBase = Math.max(0, Math.ceil((p.avg * (suggestMonths + safetyMonths)) - p.stock)); 
         
-        // Si está descontinuado, se anula la compra sugerida
         if (isDisc) {
             p.sugerido = 0;
         } else {
@@ -2313,7 +2267,6 @@ function getPlannerEvaluatedData() {
         }
         p.isDiscontinued = isDisc;
         
-        // Frecuencia de Recepción Matemática
         p.receiptDates.sort((a, b) => a - b);
         let avgDays = null;
         if (p.receiptDates.length >= 2) {
@@ -2335,11 +2288,34 @@ function getPlannerEvaluatedData() {
     return finalData;
 }
 
+// Función para alternar el estado de Descontinuado en memoria
+function toggleDiscontinued(codigo) {
+    const key = CURRENT_EMPRESA === 'ADMIN' ? 'logistic_discontinued_ADMIN' : 'logistic_discontinued_INMOB';
+    
+    if (PLANNER_DISCONTINUED[codigo]) {
+        delete PLANNER_DISCONTINUED[codigo];
+    } else {
+        PLANNER_DISCONTINUED[codigo] = true;
+        const qKey = `PL__${codigo}`;
+        if (PLANNER_DATA.requestedQtys[qKey]) {
+            delete PLANNER_DATA.requestedQtys[qKey];
+            const storageKeyQty = CURRENT_EMPRESA === 'ADMIN' ? 'logistic_planner_qtys_ADMIN' : 'logistic_planner_qtys_INMOB';
+            localStorage.setItem(storageKeyQty, JSON.stringify(PLANNER_DATA.requestedQtys));
+        }
+    }
+    
+    localStorage.setItem(key, JSON.stringify(PLANNER_DISCONTINUED));
+    processAndRenderPlanner();
+}
+
 function processAndRenderPlanner() {
     const products = getPlannerEvaluatedData();
-    const th = document.getElementById('pl-table-headers'); const tb = document.getElementById('pl-table-body');
-    const suggestMonths = parseInt(document.getElementById('pl-suggest-months').value) || 3;
-    const safetyMonths = parseInt(document.getElementById('pl-safety-stock').value) || 0;
+    const th = document.getElementById('pl-table-headers'); 
+    const tb = document.getElementById('pl-table-body');
+    if(!th || !tb) return;
+
+    const suggestMonths = parseInt(document.getElementById('pl-suggest-months') ? document.getElementById('pl-suggest-months').value : '3') || 3;
+    const safetyMonths = parseInt(document.getElementById('pl-safety-stock') ? document.getElementById('pl-safety-stock').value : '0') || 0;
     const numMonths = PLANNER_DATA.months.length || 1;
 
     if (PLANNER_DATA.months.length > 0) {
@@ -2349,15 +2325,14 @@ function processAndRenderPlanner() {
             ${PLANNER_DATA.months.map(m => `<th style="width:80px; text-align:right; font-family:monospace; font-size:11px; color:var(--text-muted);">${m.label}</th>`).join('')}
             <th style="width:100px; text-align:right; color:var(--accent);">Media Mensual<br><span style="font-size:9px;color:var(--text-tertiary);">(${numMonths} Meses)</span></th>
             <th style="width:90px; text-align:center; color:var(--text-muted);">Frec. Recepción<br><span style="font-size:9px;color:var(--text-tertiary);">(Días prom.)</span></th>
-            <th style="width:110px; text-align:right; color:var(--sys-yellow);">Sugerido<br><span style="font-size:9px;color:var(--text-tertiary);">(${suggestMonths}M + ${safetyMonths}M Seg.)</span></th>
+            <th style="width:110px; text-align:right; color:var(--sys-yellow);">Sugerido<br><span style="font-size:9px;color:var(--text-tertiary);">(${suggestMonths}M +${safetyMonths}M Seg.)</span></th>
             <th style="width:100px; text-align:right;">Stock</th>
-            <!-- NUEVA COLUMNA EN TRÁNSITO -->
             <th style="width:130px; text-align:right; color:var(--sys-orange);">En Tránsito<br><span style="font-size:9px;color:var(--text-tertiary);">(OC Pendiente)</span></th>
             <th style="width:140px; text-align:center; background:var(--surface2);">Cant. a Solicitar</th>
         </tr>`;
     }
 
-    if (!products.length) { tb.innerHTML = `<tr><td colspan="20" style="text-align:center; padding: 60px; color: var(--text-muted); font-size: 14px;">Sin registros que coincidan con los filtros seleccionados.</td></tr>`; return; }
+    if (!products || !products.length) { tb.innerHTML = `<tr><td colspan="20" style="text-align:center; padding: 60px; color: var(--text-muted); font-size: 14px;">Sin registros que coincidan con los filtros seleccionados.</td></tr>`; return; }
 
     tb.innerHTML = products.map(p => {
         const mCells = PLANNER_DATA.months.map(m => `<td class="pl-month-val">${(p.monthlyConsumptions[m.val] || 0).toLocaleString('es-ES')}</td>`).join('');
@@ -2370,5 +2345,30 @@ function processAndRenderPlanner() {
         const rowCls = p.isDiscontinued ? 'discontinued-row' : '';
         const inputDisabled = p.isDiscontinued ? 'disabled' : '';
 
-        // Botón Descontinuar
-        let
+        let safeCode = p.code.replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, "&quot;");
+        const discIcon = `<span class="btn-discontinue" onclick="toggleDiscontinued('${safeCode}')" title="${p.isDiscontinued ? 'Restaurar producto' : 'Marcar como descontinuado'}">🚫</span>`;
+
+        let trHtml = '-';
+        let tdClass = '';
+        let tdOnClick = '';
+        let tdTitle = '';
+
+        if (p.enTransito > 0) {
+            let ocsUnicas = new Set();
+            if (PENDING_ORDERS[p.code]) {
+                PENDING_ORDERS[p.code].forEach(order => {
+                    if (order.oc && String(order.oc).trim() !== '' && String(order.oc).trim() !== 'S/N') {
+                        ocsUnicas.add(String(order.oc).trim());
+                    }
+                });
+            }
+            let ocText = ocsUnicas.size > 0 ? `<span style="font-size:11px; color:var(--accent); margin-right:6px; font-weight:800; letter-spacing:0.5px;">OC: ${Array.from(ocsUnicas).join(', ')}</span>` : '';
+            
+            tdClass = 'clickable-cell-oc';
+            tdOnClick = `onclick="openInTransitDetails('${safeCode}')"`;
+            tdTitle = 'Haz clic en cualquier parte de la celda para ver el detalle de las OCs pendientes';
+
+            trHtml = `
+            <div style="display:flex; justify-content:flex-end; align-items:center; flex-wrap:wrap; gap:4px; height: 100%;">
+                ${ocText}
+                <span style="text-decoration:underline; font-size:13px; color:var(--sys-orange); font-weight:900;">+${p.enTransito}</span>
