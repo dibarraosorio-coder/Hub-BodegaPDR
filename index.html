@@ -8,162 +8,120 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- Chart.js para Gráficos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- FUENTES ELEGANTES DEL REPOSITORIO -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
+<!-- Google Fonts para el Título Elegante -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
   :root {
     --font-main: 'Nunito', -apple-system, sans-serif;
-    --font-title: 'Cormorant Garamond', serif;
-    --font-sub: 'Cinzel', serif;
+    --font-serif: 'Cinzel', serif;
     --radius-sm: 6px;
     --radius-md: 8px;
     --radius-lg: 12px;
   }
 
   /* ==============================================================
-     NUEVOS TEMAS "GLASSMORPHISM" ELEGANTES
+     SISTEMA DE TEMAS VISUALES 
      ============================================================== */
      
-  /* 1. DARK ELEGANT (Negro y Dorado) */
-  body[data-theme="dark-elegant"] {
-    --bg-gradient: linear-gradient(145deg, #0B1411 0%, #070d0a 100%);
-    --surface-glass: rgba(26,44,35, 0.6); 
-    --surface-solid: #121E18; 
-    --surface2: rgba(255,255,255,0.05);
-    --border-glass: rgba(229, 222, 206, 0.1); 
-    --text: #E5DECE; 
-    --text-muted: #84968C; 
-    --text-tertiary: #5d6f65;
-    --accent: #B39266; 
-    --accent-glow: rgba(179, 146, 102, 0.2);
-    --sys-green: #34d399; --sys-yellow: #fbbf24; --sys-orange: #fb923c; --sys-red: #ef4444;
-    --input-bg: rgba(26,44,35,0.8);
-    --btn-bg: rgba(26,44,35,0.8);
-    --btn-hover: rgba(229,222,206,0.1);
-    
-    --chart-1: #B39266; --chart-2: #84968C; --chart-3: #E5DECE; --chart-4: #5d6f65; --chart-5: #34d399; 
-    --chart-6: #fb923c; --chart-7: #fbbf24; --chart-8: #ef4444; --chart-9: #121E18; --chart-10:#2E6B46;
+  /* 1. LUXURY GREEN (Basado en tu diseño de captura) */
+  body[data-theme="luxury"] {
+    --bg: #091210; --surface: #101c1a; --surface2: #192a27; --border: #233b37; --border-light: rgba(35, 59, 55, 0.5);
+    --text: #e2e8f0; --text-muted: #8fa39e; --text-tertiary: #5f7570;
+    --accent: #d4af37; --accent-glow: rgba(212, 175, 55, 0.15); /* Oro */
+    --sys-green: #34d399; --sys-yellow: #fbbf24; --sys-orange: #fb923c; --sys-red: #f87171;
+    --chart-1: #d4af37; --chart-2: #8fa39e; --chart-3: #5f7570; --chart-4: #c9a227; --chart-5: #192a27; 
+    --chart-6: #e2e8f0; --chart-7: #4ade80; --chart-8: #2dd4bf; --chart-9: #94a3b8; --chart-10:#233b37; 
   }
 
-  /* 2. VERDE PASTEL (Solicitado) */
-  body[data-theme="verde-pastel"] {
-    --bg-gradient: linear-gradient(145deg, #F2F8F5 0%, #E3EFE8 100%);
-    --surface-glass: rgba(227, 239, 232, 0.6); 
-    --surface-solid: #E3EFE8; 
-    --surface2: rgba(0,0,0,0.03);
-    --border-glass: #A3C9B3; 
-    --text: #1C452D; 
-    --text-muted: #2E6B46; 
-    --text-tertiary: #5f8d75;
-    --accent: #145C34; 
-    --accent-glow: rgba(20, 92, 52, 0.15);
-    --sys-green: #059669; --sys-yellow: #d97706; --sys-orange: #ea580c; --sys-red: #dc2626;
-    --input-bg: #F8FBF9;
-    --btn-bg: #FFFFFF;
-    --btn-hover: #C2DCCF;
-    
-    --chart-1: #145C34; --chart-2: #2E6B46; --chart-3: #A3C9B3; --chart-4: #5f8d75; --chart-5: #059669; 
-    --chart-6: #ea580c; --chart-7: #d97706; --chart-8: #dc2626; --chart-9: #E3EFE8; --chart-10:#1C452D;
-  }
-
-  /* LEGACY THEMES ADAPTADOS AL GLASSMORPHISM */
+  /* 2. CORPORATE BLUE */
   body[data-theme="corporate"] {
-    --bg-gradient: linear-gradient(145deg, #0b1120 0%, #060913 100%);
-    --surface-glass: rgba(21, 30, 50, 0.6); --surface-solid: #151e32; --surface2: #1e293b;
-    --border-glass: rgba(51, 65, 85, 0.5); --text: #f8fafc; --text-muted: #94a3b8; --text-tertiary: #64748b;
+    --bg: #0b1120; --surface: #151e32; --surface2: #1e293b; --border: #334155; --border-light: rgba(51, 65, 85, 0.5);
+    --text: #f8fafc; --text-muted: #94a3b8; --text-tertiary: #64748b;
     --accent: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.15);
     --sys-green: #34d399; --sys-yellow: #fbbf24; --sys-orange: #fb923c; --sys-red: #f87171;
-    --input-bg: rgba(30,41,59,0.8); --btn-bg: rgba(30,41,59,0.8); --btn-hover: rgba(56,189,248,0.1);
     --chart-1: #38bdf8; --chart-2: #818cf8; --chart-3: #c084fc; --chart-4: #f472b6; --chart-5: #fb7185; 
-  }
-  
-  body[data-theme="grayscale"] {
-    --bg-gradient: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
-    --surface-glass: rgba(255, 255, 255, 0.6); --surface-solid: #f1f3f5; --surface2: rgba(0,0,0,0.03);
-    --border-glass: rgba(206, 212, 218, 0.8); --text: #212529; --text-muted: #495057; --text-tertiary: #868e96;
-    --accent: #343a40; --accent-glow: rgba(52, 58, 64, 0.15);
-    --sys-green: #2b8a3e; --sys-yellow: #f59f00; --sys-orange: #d9480f; --sys-red: #c92a2a;
-    --input-bg: #ffffff; --btn-bg: #ffffff; --btn-hover: #e9ecef;
-    --chart-1: #212529; --chart-2: #495057; --chart-3: #868e96; --chart-4: #ced4da; --chart-5: #adb5bd; 
+    --chart-6: #fbb117; --chart-7: #4ade80; --chart-8: #2dd4bf; --chart-9: #94a3b8; --chart-10:#e2e8f0; 
   }
 
+  /* 3. ESCALA DE GRISES */
+  body[data-theme="grayscale"] {
+    --bg: #f8f9fa; --surface: #ffffff; --surface2: #f1f3f5; --border: #dee2e6; --border-light: rgba(222, 226, 230, 0.5);
+    --text: #212529; --text-muted: #495057; --text-tertiary: #868e96;
+    --accent: #343a40; --accent-glow: rgba(52, 58, 64, 0.15);
+    --sys-green: #2b8a3e; --sys-yellow: #f59f00; --sys-orange: #d9480f; --sys-red: #c92a2a;
+    --chart-1: #212529; --chart-2: #495057; --chart-3: #868e96; --chart-4: #ced4da; --chart-5: #adb5bd; 
+    --chart-6: #e9ecef; --chart-7: #343a40; --chart-8: #f1f3f5; --chart-9: #f8f9fa; --chart-10:#dee2e6; 
+  }
+  
   /* ==============================================================
      ARQUITECTURA FLEXBOX NATIVA Y DISEÑO LIMPIO
      ============================================================== */
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { 
-    background: var(--bg-gradient); color: var(--text); font-family: var(--font-main); font-size: 13px; 
+    background: var(--bg); color: var(--text); font-family: var(--font-main); font-size: 13px; 
     height: 100vh; overflow: hidden;
     display: flex; flex-direction: column; 
-    transition: background 0.4s ease, color 0.4s ease; -webkit-font-smoothing: antialiased;
+    transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease; -webkit-font-smoothing: antialiased;
   }
   
   ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border-glass); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box;}
-  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); border: 2px solid transparent; background-clip: padding-box;}
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; border: 2px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
 
-  /* ESTILOS GLASSMORPHISM CORE */
-  .glass-panel {
-      background: var(--surface-glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-glass);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-  }
-  .glass-panel:hover { border-color: var(--accent); }
-
-  /* CABECERA FIJA SUPERIOR */
+  /* CABECERA FIJA SUPERIOR - DISEÑO LUXURY */
   .header { 
-    flex-shrink: 0;
-    background: var(--surface-solid); padding: 15px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid var(--border-glass); z-index: 1000;
+    flex-shrink: 0; background: var(--surface); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid var(--border); z-index: 1000;
   }
-  .header-left { display: flex; align-items: center; gap: 16px; width: 220px;}
-  .header-logo { max-height: 45px; object-fit: contain; }
   
-  .header-center { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .header-title { font-family: var(--font-title); font-size: 26px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.2;}
-  .header-sub { font-family: var(--font-sub); font-size: 10px; color: var(--text-muted); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 4px;}
+  /* Título Central Estilo Luxury */
+  .header-center { flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .header-center h1 { font-family: var(--font-serif); color: var(--accent); font-size: 22px; font-weight: 700; letter-spacing: 3px; margin: 0; text-transform: uppercase; }
+  .header-center .sub { font-size: 9px; color: var(--text-muted); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+  .header-left { flex: 0.5; display: flex; flex-direction: column; gap: 2px; }
+  .header-sub { font-size: 10px; color: var(--text-muted); font-weight: 600; font-family: monospace;}
   
-  .header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; width: auto; justify-content: flex-end;}
-  .action-row { display: flex; align-items: center; gap: 6px; background: var(--surface-glass); padding: 4px; border-radius: var(--radius-md); border: 1px solid var(--border-glass); backdrop-filter: blur(5px);}
+  .header-actions { flex: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .action-row { display: flex; align-items: center; gap: 6px; background: transparent; padding: 0;}
   
-  .theme-select { background: var(--input-bg); border: 1px solid var(--border-glass); color: var(--text-muted); border-radius: var(--radius-sm); padding: 4px 8px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; transition: 0.2s; height: 26px; text-transform: uppercase;}
+  .theme-select { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); border-radius: var(--radius-sm); padding: 4px 10px; font-size: 10px; font-weight: 800; cursor: pointer; outline: none; transition: 0.2s; height: 30px; text-transform: uppercase;}
   .theme-select:focus { border-color: var(--accent); color: var(--accent); }
 
-  .btn-company { background: transparent; color: var(--text-muted); border: none; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 4px; text-transform: uppercase; letter-spacing: 0.5px;}
-  .btn-company:hover { color: var(--text); background: var(--btn-hover); }
-  .btn-company.active { background: var(--accent); color: var(--surface-solid); box-shadow: 0 2px 10px var(--accent-glow); }
+  .btn-company { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); padding: 0 12px; height: 30px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;}
+  .btn-company:hover { color: var(--text); border-color: var(--text-muted); }
+  .btn-company.active { background: var(--accent); color: var(--bg); border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
   
-  .divider-v { width: 1px; height: 14px; background: var(--border-glass); margin: 0 2px; }
+  .divider-v { width: 1px; height: 16px; background: var(--border); margin: 0 4px; }
 
-  .btn-upload { background: var(--btn-bg); color: var(--text); border: 1px solid var(--border-glass); padding: 4px 10px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 4px; height: 26px; text-transform: uppercase;}
-  .btn-upload:hover { background: var(--accent); color: var(--surface-solid); border-color: var(--accent); }
+  /* BOTONES BULLETPROOF */
+  .btn-upload { background: var(--surface2); color: var(--text); border: 1px solid var(--border); padding: 0 12px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; height: 30px; text-transform: uppercase; letter-spacing: 0.5px;}
+  .btn-upload:hover { background: var(--text-tertiary); color: #fff; border-color: var(--text-tertiary); }
   
-  .btn-clear { background: transparent; color: var(--sys-red); border: 1px solid transparent; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 4px; text-transform: uppercase; height: 26px;}
-  .btn-clear:hover { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); }
+  .btn-sync { background: var(--sys-orange); color: #fff; border: none; padding: 0 14px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; height: 30px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(251, 146, 60, 0.2);}
+  .btn-sync:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+  .btn-clear { background: transparent; color: var(--sys-red); border: 1px solid var(--border); padding: 0 12px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; text-transform: uppercase; height: 30px;}
+  .btn-clear:hover { background: rgba(248, 113, 113, 0.1); border-color: var(--sys-red); }
 
   #upload-status { font-size: 10px; color: var(--text-muted); text-align: right; font-weight: 600; font-family: monospace;}
 
   /* CONTENIDO PRINCIPAL FLUIDO */
   #welcome-message { flex: 1; overflow-y: auto; text-align: center; padding: 80px 20px; color: var(--text-muted); }
-  #welcome-message h2 { font-family: var(--font-title); color: var(--accent); font-weight: 700; font-size: 28px; letter-spacing: 0.05em;}
+  #welcome-message h2 { color: var(--accent); font-weight: 700; font-size: 22px; letter-spacing: -0.5px;}
 
   #main-content { flex: 1; display: flex; flex-direction: column; min-height: 0; }
   .hidden { display: none !important; }
 
   /* PESTAÑAS FIJAS */
-  .tabs-container { flex-shrink: 0; display: flex; gap: 4px; padding: 12px 24px 0; border-bottom: 1px solid var(--border-glass); z-index: 90;}
-  .tab-btn { background: var(--surface-glass); backdrop-filter: blur(10px); color: var(--text-muted); border: 1px solid var(--border-glass); border-bottom: none; padding: 8px 16px; border-radius: var(--radius-sm) var(--radius-sm) 0 0; cursor: pointer; font-weight: 800; font-size: 11px; transition: all 0.2s; position: relative; text-transform: uppercase;}
-  .tab-btn:hover { color: var(--text); background: var(--btn-hover); }
-  .tab-btn.active { color: var(--accent); background: var(--surface-glass); border-color: var(--accent); border-bottom: 1px solid var(--bg-gradient);}
+  .tabs-container { flex-shrink: 0; display: flex; gap: 4px; padding: 8px 24px 0; background: var(--surface); border-bottom: 1px solid var(--border); z-index: 90;}
+  .tab-btn { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); border-bottom: none; padding: 8px 16px; border-radius: var(--radius-sm) var(--radius-sm) 0 0; cursor: pointer; font-weight: 700; font-size: 11px; transition: all 0.2s; position: relative; text-transform: uppercase;}
+  .tab-btn:hover { color: var(--text); background: var(--surface2); }
+  .tab-btn.active { color: var(--accent); background: var(--surface2); border-color: var(--accent); }
   .tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 3px; background: var(--accent); transition: background 0.4s ease; }
 
   /* GESTIÓN DE TABS ACTIVOS */
@@ -172,104 +130,106 @@
   @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ==================== TAB 1: DASHBOARD ==================== */
-  #tab-dashboard .global-filters-container { flex-shrink: 0; padding: 16px 24px 0; z-index: 80;}
+  #tab-dashboard .global-filters-container { flex-shrink: 0; padding: 12px 24px 0; background: var(--bg); z-index: 80;}
+  .filters-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);}
   .primary-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 8px; }
   .filter-group { display: flex; flex-direction: column; gap: 4px; position: relative; }
   .filter-group label { font-size: 9px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
   
-  /* Inputs y Dropdowns Slim Glass */
-  .dropdown-btn, .search-box input, .pl-select, .pl-input, .local-sort { background: var(--input-bg); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 0 10px; height: 32px; font-size: 11px; color: var(--text); font-weight: 600; text-align: left; cursor: pointer; transition: all 0.2s; outline: none; width: 100%; display: flex; align-items: center;}
+  /* Inputs y Dropdowns Slim */
+  .dropdown-btn, .search-box input, .pl-select, .pl-input, .local-sort { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 10px; height: 32px; font-size: 11px; color: var(--text); font-weight: 600; text-align: left; cursor: pointer; transition: all 0.2s; outline: none; width: 100%; display: flex; align-items: center;}
   .dropdown-btn { justify-content: space-between; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .dropdown-btn:hover, .search-box input:focus, .pl-select:focus, .pl-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow);}
+  .dropdown-btn:hover, .search-box input:focus, .pl-select:focus, .pl-input:focus { border-color: var(--accent); background: var(--surface2);}
   .dropdown-btn::after { content: '▼'; font-size: 8px; margin-left: 6px; color: var(--text-tertiary); }
   
-  .dropdown-content { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--surface-solid); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); margin-top: 4px; max-height: 250px; overflow-y: auto; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.5); padding: 6px;}
+  .dropdown-content { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-top: 4px; max-height: 250px; overflow-y: auto; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.5); padding: 6px;}
   .dropdown-content.show { display: block; animation: slideDown 0.2s ease; }
   @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
   .dropdown-item { padding: 6px 10px; display: flex; align-items: center; gap: 8px; cursor: pointer; border-radius: 4px; transition: background 0.1s; min-height: 28px;}
   .dropdown-item:hover { background: var(--surface2); }
   .dropdown-item input[type="checkbox"] { accent-color: var(--accent); cursor: pointer; width: 12px; height: 12px; margin: 0;}
-  .dropdown-item span { font-size: 11px; color: var(--text); user-select: none; font-weight: 600;}
-  .dropdown-search { padding-bottom: 6px; border-bottom: 1px solid var(--border-glass); margin-bottom: 6px; position: sticky; top: 0; background: var(--surface-solid); z-index: 2;}
-  .dropdown-search input { width: 100%; background: var(--input-bg); border: 1px solid var(--border-glass); border-radius: 4px; padding: 0 10px; height: 28px; color: var(--text); font-size: 11px; outline: none; }
+  .dropdown-item span { font-size: 11px; color: var(--text); user-select: none; font-weight: 500;}
+  .dropdown-search { padding-bottom: 6px; border-bottom: 1px solid var(--border); margin-bottom: 6px; position: sticky; top: 0; background: var(--surface); z-index: 2;}
+  .dropdown-search input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 0 10px; height: 28px; color: var(--text); font-size: 11px; outline: none; }
   .dropdown-search input:focus { border-color: var(--accent); }
 
   /* Custom Toggle Switch Slim */
-  .toggle-wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; background: var(--input-bg); border-radius: var(--radius-sm); border: 1px solid var(--border-glass); height: 32px; transition: 0.2s; white-space: nowrap;}
+  .toggle-wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; background: var(--bg); border-radius: var(--radius-sm); border: 1px solid var(--border); height: 32px; transition: 0.2s; white-space: nowrap;}
   .toggle-wrap:hover { border-color: var(--accent); }
   .toggle-labels { display: flex; flex-direction: column; justify-content: center; flex-shrink: 0;}
-  input[type="checkbox"].ios-switch { appearance: none; width: 30px; height: 16px; background: var(--surface2); border-radius: 20px; position: relative; cursor: pointer; outline: none; transition: background 0.3s; flex-shrink: 0; margin: 0; border: 1px solid var(--border-glass);}
+  input[type="checkbox"].ios-switch { appearance: none; width: 30px; height: 16px; background: var(--surface2); border-radius: 20px; position: relative; cursor: pointer; outline: none; transition: background 0.3s; flex-shrink: 0; margin: 0; border: 1px solid var(--border);}
   input[type="checkbox"].ios-switch::after { content: ''; position: absolute; top: 1px; left: 2px; width: 12px; height: 12px; background: #fff; border-radius: 50%; transition: transform 0.3s; }
   input[type="checkbox"].ios-switch:checked { background: var(--sys-green); border-color: var(--sys-green);}
   input[type="checkbox"].ios-switch:checked::after { transform: translateX(14px); }
 
-  .filters-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-glass);}
+  .filters-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-light);}
   
   .secondary-filters details { background: transparent; border: none; }
   .secondary-filters summary { font-size: 11px; font-weight: 800; color: var(--accent); cursor: pointer; list-style: none; user-select: none; display: inline-block; text-transform: uppercase;}
   .secondary-filters summary::-webkit-details-marker { display: none; }
   .secondary-filters summary:hover { filter: brightness(1.2); }
-  .secondary-filters-content { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 12px; margin-top: 12px; border-top: 1px solid var(--border-glass); }
+  .secondary-filters-content { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 12px; margin-top: 12px; border-top: 1px solid var(--border-light); }
   .secondary-filters-content .filter-group { flex: 1; min-width: 140px; }
 
   /* Scroll Exclusivo del Dashboard */
   #tab-dashboard .scroll-area { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 24px;}
   
-  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 16px 24px 0; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 12px 24px 0; }
   @media(max-width:1100px) { .kpi-grid { grid-template-columns: 1fr; } }
-  
-  .kpi-card { position: relative; display: flex; flex-direction: column; cursor: pointer; }
-  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; background: var(--accent); transition: background 0.4s ease;}
+  .kpi-card { background: var(--surface); border-radius: var(--radius-md); padding: 16px; position: relative; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.2);}
+  .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); border-color: var(--accent); }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--radius-md) var(--radius-md) 0 0; background: var(--accent); transition: background 0.4s ease;}
   .kpi-label { font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-  .kpi-value { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -0.5px; font-family: monospace;}
-  .kpi-sub { font-size: 10px; color: var(--text-muted); margin-top: 10px; background: var(--input-bg); padding: 4px 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-glass); display: inline-block; font-weight: 600;}
-  .kpi-icon { position: absolute; right: 16px; top: 16px; font-size: 24px; opacity: 0.15; color: var(--accent);}
+  .kpi-value { font-size: 24px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -0.5px; font-family: monospace;}
+  .kpi-sub { font-size: 10px; color: var(--text-muted); margin-top: 10px; background: var(--bg); padding: 4px 8px; border-radius: var(--radius-sm); border: 1px solid var(--border); display: inline-block; font-weight: 600;}
+  .kpi-icon { position: absolute; right: 16px; top: 16px; font-size: 20px; opacity: 0.1; color: var(--text);}
   
   .clickable-sub { cursor: pointer; text-decoration: none; transition: opacity 0.2s;}
   .clickable-sub:hover { opacity: 0.7; filter: brightness(1.2); }
 
   /* BOTÓN PARA OCULTAR/MOSTRAR GRÁFICOS AVANZADOS */
-  .btn-toggle-charts { background: var(--btn-bg); color: var(--text); border: 1px solid var(--border-glass); padding: 8px 24px; border-radius: 20px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-  .btn-toggle-charts:hover { background: var(--accent); color: var(--surface-solid); border-color: var(--accent); transform: translateY(-2px); }
+  .btn-toggle-charts { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); padding: 8px 24px; border-radius: 20px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+  .btn-toggle-charts:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); transform: translateY(-2px); }
 
   .charts-section { padding: 16px 24px; display: flex; flex-direction: column; gap: 16px; }
   .charts-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-  .chart-box { display: flex; flex-direction: column;}
+  .chart-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column;}
   .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-shrink: 0;}
-  .chart-header h3 { font-family: var(--font-title); font-size: 14px; font-weight: 700; color: var(--text); margin: 0; text-transform: uppercase; letter-spacing: 0.05em;}
-  .btn-view-all { font-size: 9px; background: var(--btn-bg); color: var(--text-muted); padding: 4px 10px; border-radius: 12px; cursor: pointer; border: 1px solid var(--border-glass); transition: all 0.2s; font-weight: 800; text-transform: uppercase; }
-  .btn-view-all:hover { color: var(--surface-solid); background: var(--accent); border-color: var(--accent); }
+  .chart-header h3 { font-size: 12px; font-weight: 800; color: var(--text); margin: 0; text-transform: uppercase;}
+  .btn-view-all { font-size: 9px; background: var(--surface2); color: var(--text-muted); padding: 4px 10px; border-radius: 12px; cursor: pointer; border: 1px solid var(--border); transition: all 0.2s; font-weight: 800; text-transform: uppercase; }
+  .btn-view-all:hover { color: var(--bg); background: var(--accent); border-color: var(--accent); }
   .chart-wrap-inner { position: relative; height: 230px; flex: 1;}
 
   /* TABLA TOP 10 CSS */
   .top-table { width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; }
-  .top-table th { background: var(--surface-solid); color: var(--accent); font-weight: 800; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 10px; position: sticky; top: 0; z-index: 10; border-bottom: 2px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
-  .top-table td { padding: 10px; border-bottom: 1px solid var(--border-glass); vertical-align: middle; color: var(--text); font-weight: 600;}
+  .top-table th { background: var(--surface2); color: var(--text-muted); font-weight: 800; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 10px; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--border); box-shadow: inset 0 -1px 0 var(--border), inset 0 1px 0 var(--border);}
+  .top-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; color: var(--text); font-weight: 600;}
   .top-table tr:hover { background: var(--surface2); }
 
   /* ==================== TAB 2: LISTADO Y ALERTAS ==================== */
-  #tab-listado .controls { flex-shrink: 0; padding: 16px 24px 8px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--border-glass);}
+  #tab-listado .controls { flex-shrink: 0; padding: 12px 24px 8px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; background: var(--bg); border-bottom: 1px solid var(--border);}
   .search-box { flex: 1; min-width: 180px; position: relative; }
   .search-box input { padding-left: 32px; height: 32px; width: 100%;}
   .search-box::before { content: '🔍'; position: absolute; left: 10px; top: 8px; font-size: 12px; opacity: 0.5;}
   
-  #tab-listado .table-wrap { flex: 1; overflow: auto; padding: 0 24px 24px;}
+  #tab-listado .table-wrap { flex: 1; overflow: auto; padding: 0 24px 24px; background: var(--bg);}
   .table-info { font-size: 10px; color: var(--text-tertiary); margin-bottom: 8px; display: flex; justify-content: space-between; padding-top: 10px;}
   
   table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 1050px; }
   /* TH Sticky Nativos anclados a la caja table-wrap */
-  th { background: var(--surface-solid); color: var(--accent); font-weight: 800; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px; text-align: left; cursor: pointer; user-select: none; white-space: nowrap; position: sticky; top: 0; z-index: 10; border-bottom: 2px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  th { background: var(--surface2); color: var(--text-muted); font-weight: 800; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 12px; text-align: left; cursor: pointer; user-select: none; white-space: nowrap; position: sticky; top: 0; z-index: 10; box-shadow: inset 0 -1px 0 var(--border); }
   th:hover { color: var(--text); }
   th .sort-icon { margin-left: 4px; opacity: 0.3; }
-  th.sorted .sort-icon { opacity: 1; color: var(--text); }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border-glass); vertical-align: middle; color: var(--text); font-weight: 600; word-wrap: break-word; white-space: normal;}
+  th.sorted .sort-icon { opacity: 1; color: var(--accent); }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; color: var(--text); font-weight: 600; word-wrap: break-word; white-space: normal;}
   tr { transition: background 0.2s; }
-  tr:hover { background: var(--surface2); }
+  tr:hover { background: var(--surface); }
+  tr.stagnant { background: rgba(248, 113, 113, 0.05); }
+  tr.stagnant:hover { background: rgba(248, 113, 113, 0.1); }
   
-  tr.stagnant { background: rgba(220, 38, 38, 0.05); }
-  tr.stagnant:hover { background: rgba(220, 38, 38, 0.1); }
-  tr.warning-row { background: rgba(217, 119, 6, 0.05); }
-  tr.warning-row:hover { background: rgba(217, 119, 6, 0.1); }
+  /* NUEVO: Fila amarilla para 3 meses sin movimiento */
+  tr.warning-row { background: rgba(251, 146, 60, 0.05); }
+  tr.warning-row:hover { background: rgba(251, 146, 60, 0.1); }
   
   .clickable-desc { color: var(--accent); font-weight: 700; cursor: pointer; transition: filter 0.2s; }
   .clickable-desc:hover { filter: brightness(1.2); text-decoration: underline; }
@@ -279,8 +239,8 @@
   .pill-stagnant { display: inline-flex; align-items: center; gap: 4px; color: var(--sys-red); font-size: 9px; font-weight: 800; text-transform: uppercase; }
   .pill-ok { display: inline-flex; align-items: center; gap: 4px; color: var(--sys-green); font-size: 9px; font-weight: 800; text-transform: uppercase; }
   .pill-abc { display: inline-flex; justify-content: center; align-items: center; width: 20px; height: 20px; border-radius: 4px; font-weight: 800; font-size: 10px; }
-  .pill-a { background: rgba(5, 150, 105, 0.2); color: var(--sys-green); border: 1px solid rgba(5, 150, 105, 0.3); }
-  .pill-b { background: rgba(217, 119, 6, 0.2); color: var(--sys-yellow); border: 1px solid rgba(217, 119, 6, 0.3); }
+  .pill-a { background: rgba(74, 222, 128, 0.2); color: var(--sys-green); border: 1px solid rgba(74, 222, 128, 0.3); }
+  .pill-b { background: rgba(250, 204, 21, 0.2); color: var(--sys-yellow); border: 1px solid rgba(250, 204, 21, 0.3); }
   .pill-c { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); border: 1px solid rgba(255, 255, 255, 0.2); }
   
   .oc-urgente { color: var(--sys-red); font-weight: 800; }
@@ -288,44 +248,50 @@
   .oc-ok { color: var(--sys-green); font-weight: 700;}
   .oc-na { color: var(--text-tertiary); font-style: italic; font-size: 10px; }
   .dias-cell { display: flex; align-items: center; gap: 6px; }
-  .dias-bar { width: 40px; height: 4px; border-radius: 2px; background: var(--input-bg); overflow: hidden; flex-shrink: 0; border: 1px solid var(--border-glass);}
+  .dias-bar { width: 40px; height: 4px; border-radius: 2px; background: var(--surface2); overflow: hidden; flex-shrink: 0; }
   .dias-bar-fill { height: 100%; border-radius: 2px; }
   .num { font-variant-numeric: tabular-nums; font-family: monospace; font-size: 12px;}
   .currency { font-weight: 700; }
 
   /* ==================== TAB 3: COMPARADOR ==================== */
-  #tab-comparador .comp-sticky-area { flex-shrink: 0; padding: 16px 24px 8px; border-bottom: 1px solid var(--border-glass); }
-  #tab-comparador .comparador-container { flex: 1; overflow-y: auto; padding: 0 24px 24px; margin-top:16px;}
-  .comparador-header-box { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; margin-bottom: 0; flex-wrap: wrap; gap: 10px; }
+  #tab-comparador .comp-sticky-area { flex-shrink: 0; padding: 12px 24px 8px; background: var(--bg); border-bottom: 1px solid var(--border); }
+  #tab-comparador .comparador-container { flex: 1; overflow-y: auto; padding: 0 24px 24px; }
+  .comparador-header-box { display: flex; align-items: center; justify-content: space-between; background: var(--surface); padding: 12px 16px; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-bottom: 0; flex-wrap: wrap; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);}
   .comparador-header-box h3 { font-size: 13px; font-weight: 800; color: var(--text); margin: 0;}
   .comp-chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; margin-bottom: 16px;}
-  .comp-chart-card { padding: 16px; }
-  .comp-chart-card h4 { font-family: var(--font-title); text-align: center; font-size: 13px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; margin-top: 0;}
+  .comp-chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);}
+  .comp-chart-card h4 { text-align: center; font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; margin-top: 0;}
   .comp-canvas-wrap { position: relative; height: 220px; }
   
   /* ==================== TAB 4: PLANIFICADOR ==================== */
-  #tab-planificador .pl-sticky-area { flex-shrink: 0; padding: 16px 24px 8px; border-bottom: 1px solid var(--border-glass); display: flex; flex-direction: column; gap: 12px;}
+  #tab-planificador .pl-sticky-area { flex-shrink: 0; padding: 12px 24px 8px; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px;}
   .pl-header { display: flex; justify-content: flex-end; align-items: center;}
   
-  .pl-btn-export { padding: 0 14px; background: var(--accent); color: var(--surface-solid); font-weight: 800; font-size: 10px; border-radius: var(--radius-sm); cursor: pointer; transition: 0.2s; border: none; display: flex; align-items: center; gap: 6px; text-transform: uppercase; margin-left: auto; height: 32px; box-shadow: 0 4px 12px var(--accent-glow);}
-  .pl-btn-export:hover { transform: translateY(-2px); box-shadow: 0 6px 16px var(--accent-glow);}
+  .pl-btn-export { padding: 0 14px; background: var(--accent); color: var(--bg); font-weight: 800; font-size: 10px; border-radius: var(--radius-sm); cursor: pointer; transition: 0.2s; border: none; display: flex; align-items: center; gap: 6px; text-transform: uppercase; margin-left: auto; height: 32px;}
+  .pl-btn-export:hover { filter: brightness(1.1); box-shadow: 0 0 10px var(--accent-glow);}
   
-  .pl-filters { padding: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .pl-filters { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);}
   .pl-filter-col { display: flex; flex-direction: column; justify-content: center; }
   .pl-label { font-size: 9px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px;}
   
-  #tab-planificador .pl-container { flex: 1; display: flex; flex-direction: column; min-height: 0; padding: 16px 24px 24px;}
-  .pl-table-wrap { flex: 1; overflow: auto; padding: 0; }
+  #tab-planificador .pl-container { flex: 1; display: flex; flex-direction: column; min-height: 0; padding: 8px 24px 24px;}
+  .pl-table-wrap { flex: 1; overflow: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.2);}
   .pl-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 11px; min-width: 1400px; }
+  
+  /* TH Sticky Planificador anclados a su caja */
+  #tab-planificador th { background: var(--surface2); color: var(--text-muted); padding: 10px 12px; font-weight: 800; font-size: 9px; text-transform: uppercase; position: sticky; top: 0; z-index: 10; box-shadow: inset 0 -1px 0 var(--border);}
+  
+  .pl-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text); font-weight: 600; word-wrap: break-word; white-space: normal;}
   
   /* Focus-Tracker Planificador */
   .pl-table tr { transition: background 0.15s ease, box-shadow 0.15s ease; }
   .pl-table tr:focus-within { background: var(--surface2) !important; box-shadow: inset 3px 0 0 var(--accent); }
+  .pl-table tr:hover { background: var(--bg); }
   
   /* ESTILOS PARA PRODUCTOS DESCONTINUADOS */
-  .discontinued-row { opacity: 0.5; pointer-events: auto; }
+  .discontinued-row { opacity: 0.4; pointer-events: auto; }
   .discontinued-row td { color: var(--text-muted) !important; }
-  .discontinued-row .pl-qty-input { opacity: 0.5; background: transparent; cursor: not-allowed; border-color: transparent;}
+  .discontinued-row .pl-qty-input { opacity: 0.5; background: var(--surface2); cursor: not-allowed; }
   .btn-discontinue { cursor: pointer; filter: grayscale(1); opacity: 0.3; transition: all 0.2s; font-size: 11px; margin-left: 6px; user-select: none; }
   .btn-discontinue:hover { filter: none; opacity: 1; transform: scale(1.2); }
   .discontinued-row .btn-discontinue { filter: none; opacity: 1; }
@@ -333,8 +299,8 @@
   .pl-month-val { font-family: monospace; color: var(--text-muted); font-size: 11px; text-align: right;}
   .pl-prom { color: var(--accent); font-weight: 800; font-family: monospace; text-align: right; background: var(--surface2); }
   .pl-sug { color: var(--sys-yellow); font-weight: 800; font-family: monospace; text-align: right; }
-  .pl-qty-input { width: 90px; background: var(--input-bg); border: 1px solid var(--border-glass); color: var(--text); padding: 0 10px; height: 28px; text-align: right; border-radius: var(--radius-sm); font-weight: 800; font-family: monospace; transition: all 0.2s; font-size: 12px;}
-  .pl-qty-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); outline: none;}
+  .pl-qty-input { width: 90px; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 0 10px; height: 28px; text-align: right; border-radius: var(--radius-sm); font-weight: 800; font-family: monospace; transition: all 0.2s; font-size: 12px;}
+  .pl-qty-input:focus { border-color: var(--accent); background: var(--surface); outline: none;}
   
   .clickable-cell-oc { cursor: pointer; transition: all 0.2s; }
   .clickable-cell-oc:hover { background: var(--surface2); box-shadow: inset 2px 0 0 var(--accent), inset -2px 0 0 var(--accent); }
@@ -344,20 +310,20 @@
 
   /* MODALES FLOTANTES */
   .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-  .modal-content { background: var(--surface-solid); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); width: 400px; max-width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.6); animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+  .modal-content { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); width: 400px; max-width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.6); animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
   .modal-content.large { width: 800px; max-height: 85vh; display: flex; flex-direction: column; }
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-  .modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border-glass); flex-shrink: 0;}
+  .modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0;}
   .modal-header h2 { font-size: 16px; color: var(--text); margin-bottom: 2px; font-weight: 800;}
   .modal-header p { font-size: 11px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
-  .modal-close { position: absolute; top: 12px; right: 12px; background: var(--input-bg); border: 1px solid var(--border-glass); border-radius: 50%; color: var(--text-muted); font-size: 12px; cursor: pointer; transition: all 0.2s; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-weight: bold;}
+  .modal-close { position: absolute; top: 12px; right: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 50%; color: var(--text-muted); font-size: 12px; cursor: pointer; transition: all 0.2s; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-weight: bold;}
   .modal-close:hover { background: var(--sys-red); color: #fff; border-color: var(--sys-red); }
   .modal-body { padding: 20px; }
   .modal-body.no-pad { padding: 0; overflow-y: auto; flex: 1; border-radius: 0 0 var(--radius-lg) var(--radius-lg);}
   
   .modal-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .modal-kpi { background: var(--input-bg); padding: 12px; border-radius: var(--radius-md); display: flex; flex-direction: column; border: 1px solid var(--border-glass); cursor: pointer; transition: all 0.2s; position: relative; }
-  .modal-kpi:hover { border-color: var(--accent); box-shadow: 0 8px 20px rgba(0,0,0,0.1); transform: translateY(-2px);}
+  .modal-kpi { background: var(--bg); padding: 12px; border-radius: var(--radius-md); display: flex; flex-direction: column; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; position: relative; }
+  .modal-kpi:hover { border-color: var(--accent); background: var(--surface2); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
   .modal-kpi::after { content: '🔍 VER DETALLE'; position: absolute; top: 12px; right: 12px; font-size: 8px; font-weight: 800; color: var(--accent); opacity: 0; transition: opacity 0.2s; }
   .modal-kpi:hover::after { opacity: 1; }
   .modal-kpi span { font-size: 9px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; font-weight: 800; letter-spacing: 0.5px; }
@@ -367,41 +333,48 @@
   .empty { text-align: center; padding: 40px; color: var(--text-muted); font-size: 12px; font-weight: 600;}
 </style>
 </head>
-<body data-theme="dark-elegant">
+<body data-theme="luxury">
 
-<!-- CABECERA PRINCIPAL GLASSMORPHISM -->
+<!-- CABECERA PRINCIPAL LUXURY -->
 <div class="header">
   <div class="header-left">
-    <img src="LOGO.png" alt="Logo Empresa" class="header-logo" onerror="this.style.display='none'">
+    <div class="header-sub" id="header-period">Esperando datos...</div> 
   </div>
+  
   <div class="header-center">
-    <h1 class="header-title">Hub Bodega PAV</h1>
-    <div class="header-sub" id="header-period">Dashboard de Control y Planificación Logística</div> 
+    <h1>Hub Bodega PAV</h1>
+    <div class="sub" id="dynamic-title">Dashboard de control y planificación logística</div>
   </div>
+  
   <div class="header-actions">
       <div class="action-row">
           <select id="theme-selector" class="theme-select" onchange="changeTheme(this.value)" title="Cambiar Tema Visual">
-              <option value="dark-elegant" selected>Dark Elegant</option>
-              <option value="verde-pastel">Verde Pastel</option>
+              <option value="luxury" selected>Luxury Green</option>
               <option value="corporate">Corporate Blue</option>
               <option value="grayscale">Escala de Grises</option>
               <option value="tricolor">Azul, Rojo y Blanco</option>
               <option value="pastel-pink">Rosado Pastel</option>
           </select>
           <div class="divider-v"></div>
-          <div style="display:flex; gap:2px;">
+          <div style="display:flex; gap:4px;">
               <button id="btn-admin" class="btn-company active" onclick="setEmpresa('ADMIN')">🏢 Administradora</button>
               <button id="btn-inmob" class="btn-company" onclick="setEmpresa('INMOB')">🏘️ Inmobiliaria</button>
           </div>
           <div class="divider-v"></div>
-          <div style="display:flex; gap:4px;">
-              <label for="excel-upload-admin" class="btn-upload" title="Cargar archivo Administradora">
-                  📥 Cargar ADM <input type="file" id="excel-upload-admin" accept=".xlsx, .xls" style="display:none">
-              </label>
-              <label for="excel-upload-inmob" class="btn-upload" title="Cargar archivo Inmobiliaria">
-                  📥 Cargar INM <input type="file" id="excel-upload-inmob" accept=".xlsx, .xls" style="display:none">
-              </label>
-              <button class="btn-upload" onclick="fetchOCsFromGoogle()" title="Descargar OCs en tránsito" style="background: var(--accent); color: var(--surface-solid); border-color: var(--accent);">
+          <div style="display:flex; gap:6px;">
+              
+              <!-- BOTONES BULLETPROOF CON JS DIRECTO -->
+              <button class="btn-upload" onclick="document.getElementById('excel-upload-admin').click()">
+                  📥 Cargar ADM
+              </button>
+              <input type="file" id="excel-upload-admin" accept=".xlsx, .xls" style="display:none;">
+
+              <button class="btn-upload" onclick="document.getElementById('excel-upload-inmob').click()">
+                  📥 Cargar INM
+              </button>
+              <input type="file" id="excel-upload-inmob" accept=".xlsx, .xls" style="display:none;">
+
+              <button class="btn-sync" onclick="fetchOCsFromGoogle()" title="Descargar OCs en tránsito directamente desde Google Sheets">
                   🔄 Sincronizar OC
               </button>
               <button class="btn-clear" onclick="clearAllData()" title="Limpiar todos los datos">
@@ -434,7 +407,7 @@
   <div id="tab-dashboard" class="tab-content active">
     <!-- FILTROS GLOBALES -->
     <div id="global-filters" class="global-filters-container">
-      <div class="filters-box glass-panel">
+      <div class="filters-box">
           <div class="primary-filters">
             <div class="filter-group"><label>Año</label><button class="dropdown-btn" id="btn-flt-anio" onclick="toggleDropdown('dropdown-anio')">Todas las opciones</button><div class="dropdown-content" id="dropdown-anio"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-anio', this.value)"></div><div class="dropdown-list" id="list-flt-anio"></div></div></div>
             <div class="filter-group"><label>Mes</label><button class="dropdown-btn" id="btn-flt-mes" onclick="toggleDropdown('dropdown-mes')">Todas las opciones</button><div class="dropdown-content" id="dropdown-mes"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-mes', this.value)"></div><div class="dropdown-list" id="list-flt-mes"></div></div></div>
@@ -444,20 +417,20 @@
             <div class="filter-group"><label>Familia</label><button class="dropdown-btn" id="btn-flt-familia" onclick="toggleDropdown('dropdown-familia')">Todas las opciones</button><div class="dropdown-content" id="dropdown-familia"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-familia', this.value)"></div><div class="dropdown-list" id="list-flt-familia"></div></div></div>
           </div>
           
-          <div class="filters-footer">
+          <div class="filters-footer" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light);">
               <details class="secondary-filters" style="flex: 1; margin-right: 20px;">
                   <summary>+ Mostrar Filtros Adicionales</summary>
-                  <div class="secondary-filters-content">
-                    <div class="filter-group"><label>Nº Documento</label><button class="dropdown-btn" id="btn-flt-numdoc" onclick="toggleDropdown('dropdown-numdoc')">Todas</button><div class="dropdown-content" id="dropdown-numdoc"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-numdoc', this.value)"></div><div class="dropdown-list" id="list-flt-numdoc"></div></div></div>
-                    <div class="filter-group"><label>Tipo Documento</label><button class="dropdown-btn" id="btn-flt-tipodoc" onclick="toggleDropdown('dropdown-tipodoc')">Todas</button><div class="dropdown-content" id="dropdown-tipodoc"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-tipodoc', this.value)"></div><div class="dropdown-list" id="list-flt-tipodoc"></div></div></div>
-                    <div class="filter-group"><label>Nat. Transacción</label><button class="dropdown-btn" id="btn-flt-nat" onclick="toggleDropdown('dropdown-nat')">Todas</button><div class="dropdown-content" id="dropdown-nat"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-nat', this.value)"></div><div class="dropdown-list" id="list-flt-nat"></div></div></div>
-                    <div class="filter-group"><label>Comprador / Vend.</label><button class="dropdown-btn" id="btn-flt-comp" onclick="toggleDropdown('dropdown-comp')">Todas</button><div class="dropdown-content" id="dropdown-comp"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-comp', this.value)"></div><div class="dropdown-list" id="list-flt-comp"></div></div></div>
-                    <div class="filter-group"><label>Ceco Code</label><button class="dropdown-btn" id="btn-flt-ceco" onclick="toggleDropdown('dropdown-ceco')">Todas</button><div class="dropdown-content" id="dropdown-ceco"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-ceco', this.value)"></div><div class="dropdown-list" id="list-flt-ceco"></div></div></div>
+                  <div class="secondary-filters-content" style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 12px; margin-top: 12px; border-top: 1px solid var(--border-light); ">
+                    <div class="filter-group" style="flex: 1; min-width: 150px;"><label>Nº Documento</label><button class="dropdown-btn" id="btn-flt-numdoc" onclick="toggleDropdown('dropdown-numdoc')">Todas</button><div class="dropdown-content" id="dropdown-numdoc"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-numdoc', this.value)"></div><div class="dropdown-list" id="list-flt-numdoc"></div></div></div>
+                    <div class="filter-group" style="flex: 1; min-width: 150px;"><label>Tipo Documento</label><button class="dropdown-btn" id="btn-flt-tipodoc" onclick="toggleDropdown('dropdown-tipodoc')">Todas</button><div class="dropdown-content" id="dropdown-tipodoc"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-tipodoc', this.value)"></div><div class="dropdown-list" id="list-flt-tipodoc"></div></div></div>
+                    <div class="filter-group" style="flex: 1; min-width: 150px;"><label>Nat. Transacción</label><button class="dropdown-btn" id="btn-flt-nat" onclick="toggleDropdown('dropdown-nat')">Todas</button><div class="dropdown-content" id="dropdown-nat"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-nat', this.value)"></div><div class="dropdown-list" id="list-flt-nat"></div></div></div>
+                    <div class="filter-group" style="flex: 1; min-width: 150px;"><label>Comprador / Vend.</label><button class="dropdown-btn" id="btn-flt-comp" onclick="toggleDropdown('dropdown-comp')">Todas</button><div class="dropdown-content" id="dropdown-comp"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-comp', this.value)"></div><div class="dropdown-list" id="list-flt-comp"></div></div></div>
+                    <div class="filter-group" style="flex: 1; min-width: 150px;"><label>Ceco Code</label><button class="dropdown-btn" id="btn-flt-ceco" onclick="toggleDropdown('dropdown-ceco')">Todas</button><div class="dropdown-content" id="dropdown-ceco"><div class="dropdown-search"><input type="text" placeholder="Buscar..." onkeyup="filterDropdownList('dropdown-ceco', this.value)"></div><div class="dropdown-list" id="list-flt-ceco"></div></div></div>
                   </div>
               </details>
               
               <div style="display:flex; align-items:center; gap:16px; margin-left: auto;">
-                  <div class="toggle-wrap" title="Oculta los productos que tienen 0 unidades físicas en la bodega.">
+                  <div class="toggle-wrap" style="margin: 0; height: 32px;" title="Oculta los productos que tienen 0 unidades físicas en la bodega. Así te enfocas solo en lo que tienes o está quebrado por sistema.">
                     <div class="toggle-labels"><span style="font-size:11px; font-weight:700;">Ocultar Stock 0</span></div>
                     <input type="checkbox" id="flt-stock0" class="ios-switch" checked onchange="applyGlobalFilters()">
                   </div>
@@ -470,19 +443,19 @@
     <!-- ÁREA CON SCROLL PROPIO -->
     <div class="scroll-area">
         <div class="kpi-grid">
-          <div class="kpi-card glass-panel" onclick="openDetailsModal('kpi-total')">
+          <div class="kpi-card blue" onclick="openDetailsModal('kpi-total')">
             <div class="kpi-icon">📦</div>
             <div class="kpi-label">Cantidad de SKUs</div>
             <div class="kpi-value" id="kpi-total">—</div>
             <div class="kpi-sub" id="kpi-sub-total">Analizando...</div>
           </div>
-          <div class="kpi-card glass-panel" onclick="openDetailsModal('kpi-valor')">
+          <div class="kpi-card green" onclick="openDetailsModal('kpi-valor')">
             <div class="kpi-icon">💰</div>
             <div class="kpi-label">Valor del Inventario</div>
             <div class="kpi-value" id="kpi-valor">—</div>
             <div class="kpi-sub" id="kpi-sub-valor">Calculando riesgo...</div>
           </div>
-          <div class="kpi-card glass-panel" onclick="openDetailsModal('kpi-flujo')">
+          <div class="kpi-card purple" onclick="openDetailsModal('kpi-flujo')">
             <div class="kpi-icon">📊</div>
             <div class="kpi-label">Volumen de Consumo (Unidades)</div>
             <div class="kpi-value" id="kpi-flujo">—</div>
@@ -492,22 +465,24 @@
         
         <div class="charts-section">
           
+          <!-- BOTÓN PARA MOSTRAR/OCULTAR GRÁFICOS AVANZADOS -->
           <div style="display: flex; justify-content: center; width: 100%;">
               <button id="btn-toggle-advanced" class="btn-toggle-charts" onclick="toggleAdvancedCharts()">
                   Ver Análisis Avanzado (Pareto & ABC) ▼
               </button>
           </div>
 
+          <!-- FILA DE GRÁFICOS AVANZADOS (OCULTA POR DEFECTO) -->
           <div class="charts-row hidden" id="advanced-charts-row">
-            <div class="chart-box glass-panel">
+            <div class="chart-box">
                 <div class="chart-header">
                     <h3>📦 Distribución Capital ABC</h3>
                 </div>
                 <div class="chart-wrap-inner" title="Porcentaje del valor total de inventario por clase ABC"><canvas id="chart-abc"></canvas></div>
             </div>
-            <div class="chart-box glass-panel" style="flex: 2;">
+            <div class="chart-box" style="flex: 2;">
                 <div class="chart-header">
-                    <h3>📊 Curva de Pareto: Valor de Consumos</h3>
+                    <h3>📊 Curva de Pareto: Valor de Consumos (Top 50)</h3>
                     <button class="btn-view-all" onclick="openDetailsModal('val')">Ver Ranking Completo</button>
                 </div>
                 <div class="chart-wrap-inner" title="Regla 80/20: Analiza los productos de mayor impacto"><canvas id="chart-pareto"></canvas></div>
@@ -515,21 +490,21 @@
           </div>
           
           <div class="charts-row">
-            <div class="chart-box glass-panel">
+            <div class="chart-box">
                 <div class="chart-header">
                     <h3>📦 Mayor Salida (Unidades)</h3>
                     <button class="btn-view-all" onclick="openDetailsModal('qty')">Ver Listado</button>
                 </div>
                 <div class="chart-wrap-inner" title="Haz clic en una porción para ver el detalle"><canvas id="chart-qty"></canvas></div>
             </div>
-            <div class="chart-box glass-panel">
+            <div class="chart-box">
                 <div class="chart-header">
                     <h3>💰 Mayor Salida (Costo Movido)</h3>
                     <button class="btn-view-all" onclick="openDetailsModal('val')">Ver Listado</button>
                 </div>
                 <div class="chart-wrap-inner" title="Haz clic en una porción para ver el detalle"><canvas id="chart-val"></canvas></div>
             </div>
-            <div class="chart-box glass-panel">
+            <div class="chart-box">
                 <div class="chart-header">
                     <h3>⚖️ Flujo: Compras vs Salidas</h3>
                     <button class="btn-view-all" onclick="openDetailsModal('flow')">Ver Listado</button>
@@ -540,7 +515,7 @@
         </div>
         
         <div class="charts-section" style="padding-top: 0;">
-          <div class="chart-box glass-panel">
+          <div class="chart-box">
               <div class="chart-header">
                   <h3>📈 Evolución de Transacciones</h3>
               </div>
@@ -549,7 +524,7 @@
         </div>
         
         <div class="charts-section" style="padding-top: 0;">
-          <div class="chart-box glass-panel">
+          <div class="chart-box">
               <div class="chart-header">
                   <h3>🏆 Solicitantes</h3>
               </div>
@@ -577,6 +552,7 @@
     <div class="controls">
       <div class="search-box"><input type="text" id="lst-search" placeholder="Buscar por código o descripción..." oninput="renderTable()"></div>
       
+      <!-- NUEVOS FILTROS LISTADO -->
       <select id="lst-familia" class="pl-select" style="width:140px; margin-left:10px;" onchange="renderTable()">
           <option value="TODAS">Todas las familias</option>
       </select>
@@ -598,30 +574,28 @@
         <option value="dias_stock">Ordenar: Días Stock</option>
         <option value="valor_inventario">Ordenar: Valor Inv.</option>
       </select>
-      <button class="filter-btn" style="background: var(--accent); color: var(--surface-solid); margin-left: auto; height:32px;" onclick="exportToExcelListado()">Exportar a Excel</button>
+      <button class="filter-btn" style="background: var(--accent); color: var(--bg); margin-left: auto; height:32px;" onclick="exportToExcelListado()">Exportar a Excel</button>
     </div>
     <div class="table-wrap">
       <div class="table-info"><span id="table-info-txt"></span><span style="font-style: italic;">* Clasificación ABC basada en la Ley de Pareto.</span></div>
-      <div class="glass-panel" style="padding:0; overflow:hidden;">
-        <table>
-          <thead>
-            <tr>
-              <th onclick="sortByCol('abc')" style="text-align:center; width: 60px;">ABC <span class="sort-icon">↕</span></th>
-              <th onclick="sortByCol('codigo')" style="width: 130px;">Código <span class="sort-icon">↕</span></th>
-              <th>Descripción</th>
-              <th onclick="sortByCol('stock_actual')" style="text-align:center; width: 80px;">Stock <span class="sort-icon">↕</span></th>
-              <th onclick="sortByCol('consumos_negativos')" style="text-align:center; width: 110px;">Total Salidas <span class="sort-icon">↕</span></th>
-              <th onclick="sortByCol('ultimo_consumo')" style="width: 110px;">Último Consumo <span class="sort-icon">↕</span></th>
-              <th style="width: 100px;">Estado</th>
-              <th onclick="sortByCol('precio_unitario')" style="text-align:right; width: 100px;">Valor Unit. <span class="sort-icon">↕</span></th>
-              <th onclick="sortByCol('dias_stock')" style="width: 120px;">Días Stock <span class="sort-icon">↕</span></th>
-              <th onclick="sortByCol('valor_inventario')" style="text-align:right; width: 110px;">Valor Inv. <span class="sort-icon">↕</span></th>
-              <th onclick="sortByCol('dias_para_oc')" style="width: 140px;">Sugerido OC <span class="sort-icon">↕</span></th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sortByCol('abc')" style="text-align:center; width: 60px;">ABC <span class="sort-icon">↕</span></th>
+            <th onclick="sortByCol('codigo')" style="width: 130px;">Código <span class="sort-icon">↕</span></th>
+            <th>Descripción</th>
+            <th onclick="sortByCol('stock_actual')" style="text-align:center; width: 80px;">Stock <span class="sort-icon">↕</span></th>
+            <th onclick="sortByCol('consumos_negativos')" style="text-align:center; width: 110px;">Total Salidas <span class="sort-icon">↕</span></th>
+            <th onclick="sortByCol('ultimo_consumo')" style="width: 110px;">Último Consumo <span class="sort-icon">↕</span></th>
+            <th style="width: 100px;">Estado</th>
+            <th onclick="sortByCol('precio_unitario')" style="text-align:right; width: 100px;">Valor Unit. <span class="sort-icon">↕</span></th>
+            <th onclick="sortByCol('dias_stock')" style="width: 120px;">Días Stock <span class="sort-icon">↕</span></th>
+            <th onclick="sortByCol('valor_inventario')" style="text-align:right; width: 110px;">Valor Inv. <span class="sort-icon">↕</span></th>
+            <th onclick="sortByCol('dias_para_oc')" style="width: 140px;">Sugerido OC <span class="sort-icon">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
       <div class="empty" id="empty" style="display:none">No se encontraron productos con los filtros aplicados.</div>
     </div>
   </div>
@@ -629,7 +603,7 @@
   <!-- TAB 3: COMPARADOR DE PRODUCTOS -->
   <div id="tab-comparador" class="tab-content">
     <div class="comp-sticky-area">
-      <div class="comparador-header-box glass-panel">
+      <div class="comparador-header-box">
         <h3>Selecciona los productos que deseas comparar:</h3>
         <div style="display: flex; gap: 10px; flex: 1; justify-content: flex-end; align-items:center;">
           <div class="filter-group" style="min-width: 320px; max-width: 500px; margin:0;">
@@ -646,19 +620,14 @@
     <div class="comparador-container">
       <div id="comparador-wrapper" style="display: none;">
         <div class="comp-chart-grid">
-          <div class="comp-chart-card glass-panel"><h4>📦 Distribución de Stock Actual</h4><div class="comp-canvas-wrap"><canvas id="comp-stock"></canvas></div></div>
-          <div class="comp-chart-card glass-panel"><h4>📉 Distribución de Salidas (Período)</h4><div class="comp-canvas-wrap"><canvas id="comp-salidas"></canvas></div></div>
-          <div class="comp-chart-card glass-panel"><h4>🛒 Distribución de Compras (Período)</h4><div class="comp-canvas-wrap"><canvas id="comp-compras"></canvas></div></div>
+          <div class="comp-chart-card"><h4>📦 Distribución de Stock Actual</h4><div class="comp-canvas-wrap"><canvas id="comp-stock"></canvas></div></div>
+          <div class="comp-chart-card"><h4>📉 Distribución de Salidas (Período)</h4><div class="comp-canvas-wrap"><canvas id="comp-salidas"></canvas></div></div>
+          <div class="comp-chart-card"><h4>🛒 Distribución de Compras (Período)</h4><div class="comp-canvas-wrap"><canvas id="comp-compras"></canvas></div></div>
         </div>
-        <div class="glass-panel" style="padding:0; overflow:hidden;">
-          <table style="margin-bottom:0; width:100%; text-align:left; border-collapse:collapse;">
-            <thead>
-              <tr><th style="background:var(--surface-solid); color:var(--accent); padding:10px; border-bottom:2px solid var(--accent);">Código</th>
-              <th style="background:var(--surface-solid); color:var(--accent); padding:10px; border-bottom:2px solid var(--accent);">Descripción</th>
-              <th style="background:var(--surface-solid); color:var(--accent); padding:10px; border-bottom:2px solid var(--accent); text-align:center;">Stock</th>
-              <th style="background:var(--surface-solid); color:var(--accent); padding:10px; border-bottom:2px solid var(--accent); text-align:center;">Total Compras</th>
-              <th style="background:var(--surface-solid); color:var(--accent); padding:10px; border-bottom:2px solid var(--accent); text-align:center;">Total Salidas</th>
-              <th style="background:var(--surface-solid); color:var(--accent); padding:10px; border-bottom:2px solid var(--accent); text-align:right;">Valor Inv. ($)</th></tr>
+        <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+          <table style="margin-bottom:0;">
+            <thead style="background: var(--surface2);">
+              <tr><th>Código</th><th>Descripción</th><th style="text-align:center;">Stock</th><th style="text-align:center;">Total Compras</th><th style="text-align:center;">Total Salidas</th><th style="text-align:right;">Valor Inv. ($)</th></tr>
             </thead>
             <tbody id="tbody-comparador"></tbody>
           </table>
@@ -680,7 +649,7 @@
           </div>
       </div>
 
-      <div class="pl-filters glass-panel">
+      <div class="pl-filters">
           <div class="pl-filter-col"><label class="pl-label">Parque</label><select id="pl-parque-select" class="pl-select"><option value="TODOS">Todos los parques</option></select></div>
           <div class="pl-filter-col"><label class="pl-label">Cód. Almacén</label><select id="pl-warehouse-select" class="pl-select"><option value="TODAS">Todas las bodegas</option></select></div>
           
@@ -749,15 +718,15 @@
               <label class="pl-label">Búsqueda rápida</label>
               <div style="display:flex; gap: 10px;">
                   <input type="text" id="pl-search-bar" class="pl-input" placeholder="Código o descripción..." style="flex: 1;">
-                  <button id="pl-clear-cache" class="btn-clear" style="height:28px; padding:0 16px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);" title="Borrar cantidades digitadas">🗑️ Limpiar Cant.</button>
+                  <button id="pl-clear-cache" class="btn-clear" style="height:28px; padding:0 16px; background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.3);" title="Borrar cantidades digitadas">🗑️ Limpiar Cant.</button>
               </div>
           </div>
       </div>
     </div>
 
     <div class="pl-container">
-      <div class="pl-table-wrap glass-panel" style="padding:0; overflow:hidden;">
-          <table class="pl-table" style="width: 100%; border-collapse: collapse;">
+      <div class="pl-table-wrap">
+          <table class="pl-table">
               <thead id="pl-table-headers">
                   <tr>
                       <th style="width:110px;">Código</th>
@@ -766,6 +735,7 @@
                       <th style="width:90px; text-align:center; color:var(--text-muted);">Frec. Recepción</th>
                       <th style="width:110px; text-align:right; color:var(--sys-yellow);">Sugerido</th>
                       <th style="width:100px; text-align:right;">Stock</th>
+                      <th style="width:130px; text-align:right; color:var(--sys-orange);">En Tránsito<br><span style="font-size:9px;color:var(--text-tertiary);">(OC Pendiente)</span></th>
                       <th style="width:140px; text-align:center; background:var(--surface2);">Cant. a Solicitar</th>
                   </tr>
               </thead>
@@ -779,12 +749,11 @@
 
 </div> <!-- FIN MAIN CONTENT -->
 
-
 <!-- MODAL FLOTANTE DETALLE PRODUCTO -->
 <div id="product-modal" class="modal-overlay hidden">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-header"><h2 id="modal-title" style="font-family: var(--font-title); font-size: 20px;">Código</h2><p id="modal-desc">Descripción</p></div>
+    <div class="modal-header"><h2 id="modal-title">Código</h2><p id="modal-desc">Descripción</p></div>
     <div class="modal-body">
       <div class="modal-kpi-grid">
         <div class="modal-kpi m-stock full"><span>📦 Stock Actual (Filtros Estructurales)</span><strong id="m-stock">0</strong></div>
@@ -802,12 +771,12 @@
   <div class="modal-content large">
     <button class="modal-close" onclick="closeRankingModal()">✕</button>
     <div class="modal-header">
-      <h2 id="rm-title" style="font-family: var(--font-title); font-size: 22px; color:var(--accent);">Ranking</h2>
+      <h2 id="rm-title" style="color:var(--text);">Ranking</h2>
       <p id="rm-desc">Listado completo</p>
     </div>
     <div class="modal-body no-pad">
-      <table class="pl-table" style="min-width: 100%; border:none; box-shadow:none; border-collapse:collapse;">
-        <thead style="background: var(--surface-solid); position: sticky; top: 0; z-index: 5;" id="rm-thead">
+      <table class="pl-table" style="min-width: 100%; border:none; box-shadow:none;">
+        <thead style="background: var(--surface2); position: sticky; top: 0; z-index: 5;" id="rm-thead">
           <tr>
             <th style="width:50px; text-align:center;">#</th>
             <th style="width:120px;">Código</th>
@@ -886,14 +855,18 @@ let chartInstances = {};
 
 let sortCol = 'codigo'; let sortAsc = true;
 
+// Estado Modal Sorting
 let modalData = []; let modalSortCol = 'col4'; let modalSortAsc = false; let currentModalType = '';
 
+// Memoria para el archivo de seguimiento de proveedores (OCs en tránsito)
 let PENDING_ORDERS = {}; 
 
+// Estado dual para el Planificador de Compras (Cantidades)
 let savedPlannerQtysAdmin = {}; let savedPlannerQtysInmob = {};
 try { savedPlannerQtysAdmin = JSON.parse(localStorage.getItem('logistic_planner_qtys_ADMIN')) || {}; } catch(e){}
 try { savedPlannerQtysInmob = JSON.parse(localStorage.getItem('logistic_planner_qtys_INMOB')) || {}; } catch(e){}
 
+// Estado dual para Productos Descontinuados
 let DISCONTINUED_ADMIN = {}; let DISCONTINUED_INMOB = {};
 try { DISCONTINUED_ADMIN = JSON.parse(localStorage.getItem('logistic_discontinued_ADMIN')) || {}; } catch(e){}
 try { DISCONTINUED_INMOB = JSON.parse(localStorage.getItem('logistic_discontinued_INMOB')) || {}; } catch(e){}
@@ -1005,13 +978,13 @@ function setEmpresa(empresa, force = false) {
    document.getElementById('btn-admin').classList.toggle('active', empresa === 'ADMIN');
    document.getElementById('btn-inmob').classList.toggle('active', empresa === 'INMOB');
    
-   // ASIGNAR EL TEMA CORRECTO AUTOMÁTICAMENTE
-   if(empresa === 'ADMIN') document.getElementById('theme-selector').value = 'dark-elegant';
-   if(empresa === 'INMOB') document.getElementById('theme-selector').value = 'verde-pastel';
+   if(empresa === 'ADMIN') document.getElementById('theme-selector').value = 'luxury';
+   if(empresa === 'INMOB') document.getElementById('theme-selector').value = 'grayscale';
    changeTheme(document.getElementById('theme-selector').value);
    
    RAW_EXCEL_ROWS = empresa === 'ADMIN' ? RAW_EXCEL_ADMIN : RAW_EXCEL_INMOB;
    PLANNER_DATA = empresa === 'ADMIN' ? PLANNER_DATA_ADMIN : PLANNER_DATA_INMOB;
+   
    PLANNER_DISCONTINUED = empresa === 'ADMIN' ? DISCONTINUED_ADMIN : DISCONTINUED_INMOB;
    
    document.getElementById('welcome-title').textContent = `Carga un archivo Excel de ${empresa === 'ADMIN' ? 'Administradora' : 'Inmobiliaria'}`;
@@ -1055,4 +1028,4 @@ function toggleDropdown(id) {
   document.querySelectorAll('.dropdown-content').forEach(el => { if(el.id !== id) el.classList.remove('show'); });
   document.getElementById(id).classList.toggle('show');
 }
-window.onclick = function(event) {
+window
