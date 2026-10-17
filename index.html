@@ -45,7 +45,6 @@
     --accent-gold: #B39266;
     --neon-red: #ef4444;
 
-    /* Mapeo de compatibilidad con componentes del Dashboard */
     --bg: var(--bg-body);
     --surface: var(--card-bg);
     --surface2: var(--header-bg-solid);
@@ -217,7 +216,6 @@
   /* ==============================================================
      MODOS DE ACCESIBILIDAD Y CONTRASTE (NIVEL 1 Y NIVEL 2)
      ============================================================== */
-  /* NIVEL 1: DALTONISMO (Colores Sólidos Universales y Peso Visual) */
   body.contrast-1 { font-weight: 700; }
   body.contrast-1 .pill-ok, body.contrast-1 .oc-ok { color: #0055ff !important; font-weight: 900 !important; }
   body.contrast-1 .pill-stagnant, body.contrast-1 .oc-urgente { color: #d90000 !important; font-weight: 900 !important; }
@@ -226,7 +224,6 @@
   body.contrast-1 .pill-b { background: #ff8800 !important; color: #000000 !important; border-color: #cc6600 !important; }
   body.contrast-1 .pill-c { background: #8800ff !important; color: #ffffff !important; border-color: #5500aa !important; }
 
-  /* NIVEL 2: ALTO CONTRASTE ABSOLUTO EN TODAS LAS PALETAS */
   body.contrast-2 { font-weight: 800; }
   body.contrast-2:not(.light-mode):not(.theme-gray):not(.theme-blue):not(.theme-pink):not(.theme-green) {
     --text-main: #FFFFFF; --text-muted: #CCCCCC; --glass-border: #FFFFFF; --input-border: #FFFFFF; --accent-gold: #FFD700;
@@ -234,14 +231,14 @@
   body.contrast-2.light-mode, body.contrast-2.theme-gray, body.contrast-2.theme-blue, body.contrast-2.theme-pink, body.contrast-2.theme-green {
     --text-main: #000000; --text-muted: #222222; --glass-border: #000000; --input-border: #000000; --header-title: #000000; --accent-gold: #000000;
   }
-  body.contrast-2 .filters-box, body.contrast-2 .kpi-card, body.contrast-2 .chart-box, body.contrast-2 .comparador-header-box, body.contrast-2 .comp-chart-card, body.contrast-2 .pl-filters, body.contrast-2 .pl-table-wrap, body.contrast-2 .modal-content {
+  body.contrast-2 .filters-box, body.contrast-2 .kpi-card, body.contrast-2 .chart-box, body.contrast-2 .comparador-header-box, body.contrast-2 .comp-chart-card, body.contrast-2 .pl-filters, body.contrast-2 .pl-table-wrap, body.contrast-2 .modal-content, body.contrast-2 .start-card {
     border: 2px solid var(--text-main) !important; background: var(--bg-body) !important; box-shadow: none !important;
   }
   body.contrast-2 th, body.contrast-2 .top-table th, body.contrast-2 #tab-planificador th {
     background: var(--text-main) !important; color: var(--bg-body) !important; border-bottom: 3px solid var(--text-main) !important;
   }
   body.contrast-2 td { border-bottom: 1px solid var(--text-muted) !important; }
-  body.contrast-2 .dropdown-btn, body.contrast-2 .search-box input, body.contrast-2 .pl-select, body.contrast-2 .pl-input, body.contrast-2 .local-sort, body.contrast-2 .theme-select {
+  body.contrast-2 .dropdown-btn, body.contrast-2 .search-box input, body.contrast-2 .pl-select, body.contrast-2 .pl-input, body.contrast-2 .local-sort {
     border: 2px solid var(--text-main) !important; background: transparent !important; color: var(--text-main) !important;
   }
   body.contrast-2 .pill-ok, body.contrast-2 .oc-ok { background: #000 !important; color: #00FF00 !important; padding: 2px 6px; border: 2px solid #00FF00 !important; text-decoration: underline; }
@@ -295,6 +292,7 @@
     object-fit: contain;
     flex-shrink: 0;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+    cursor: pointer;
   }
   .header-left {
     display: flex;
@@ -358,24 +356,6 @@
     border-color: var(--accent-gold);
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
-
-  .theme-select {
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    color: var(--accent-gold);
-    border-radius: var(--radius-sm);
-    padding: 4px 8px;
-    font-family: var(--font-main);
-    font-size: 10px;
-    font-weight: 800;
-    cursor: pointer;
-    outline: none;
-    transition: 0.2s;
-    height: 28px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .theme-select:focus, .theme-select:hover { border-color: var(--accent-gold); }
 
   .btn-company {
     background: transparent;
@@ -450,15 +430,137 @@
 
   #upload-status { font-size: 10px; color: var(--text-muted); text-align: right; font-weight: 700; font-family: monospace; }
 
-  /* CONTENIDO PRINCIPAL FLUIDO */
-  #welcome-message { flex: 1; overflow-y: auto; text-align: center; padding: 90px 20px; color: var(--text-muted); }
-  #welcome-message h2 {
+  /* ==============================================================
+     PANTALLA DE INICIO (SELECCIÓN DE CENTRO DE COSTO Y CARGA)
+     ============================================================== */
+  #welcome-message {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+  }
+  .start-screen-box {
+    max-width: 780px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+  }
+  .start-screen-box h2 {
     font-family: var(--font-title);
     color: var(--header-title);
     font-weight: 700;
-    font-size: 28px;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .start-screen-sub {
+    font-family: var(--font-subtitle);
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+  .start-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .start-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  .start-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent-gold);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  .start-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-gold);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  }
+  .start-card:hover::before { opacity: 1; }
+  .start-card-icon {
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .start-card-title {
+    font-family: var(--font-title);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--header-title);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .start-card-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    max-width: 260px;
+  }
+  .start-card-cta {
+    margin-top: 8px;
+    background: var(--accent-gold);
+    color: #111111;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px var(--accent-glow);
+    transition: all 0.2s ease;
+  }
+  .start-card:hover .start-card-cta {
+    background: #ffffff;
+    transform: scale(1.03);
+  }
+  .start-card-memory-btn {
+    margin-top: 6px;
+    background: var(--input-bg);
+    color: var(--text-main);
+    border: 1px solid var(--glass-border);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .start-card-memory-btn:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
   }
 
   #main-content { flex: 1; display: flex; flex-direction: column; min-height: 0; }
@@ -513,7 +615,13 @@
   @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ==================== TAB 1: DASHBOARD ==================== */
-  #tab-dashboard .global-filters-container { flex-shrink: 0; padding: 12px 24px 0; background: transparent; z-index: 80; }
+  #tab-dashboard .global-filters-container {
+    flex-shrink: 0;
+    padding: 12px 24px 0;
+    background: transparent;
+    position: relative;
+    z-index: 500;
+  }
   .filters-box {
     background: var(--card-bg);
     border: 1px solid var(--glass-border);
@@ -522,6 +630,9 @@
     padding: 14px 18px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 500;
+    overflow: visible;
   }
   .filters-box:hover { border-color: var(--accent-gold); }
   .primary-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 8px; }
@@ -560,31 +671,32 @@
   }
   .dropdown-btn::after { content: '▼'; font-size: 8px; margin-left: 6px; color: var(--accent-gold); }
   
+  /* SOLUCIÓN AL CORTE VISUAL DEL DROPDOWN FAMILIA */
   .dropdown-content {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
-    right: 0;
+    min-width: 220px;
+    width: max-content;
+    max-width: 320px;
     background: var(--card-bg);
     border: 1px solid var(--accent-gold);
     border-radius: 8px;
-    margin-top: 4px;
-    max-height: 250px;
+    max-height: 260px;
     overflow-y: auto;
-    z-index: 9999;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.45);
-    padding: 6px;
-    backdrop-filter: blur(12px);
+    z-index: 99999;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.55);
+    padding: 8px;
   }
   .dropdown-content.show { display: block; animation: slideDown 0.2s ease; }
   @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
   .dropdown-item { padding: 6px 10px; display: flex; align-items: center; gap: 8px; cursor: pointer; border-radius: 6px; transition: background 0.15s; min-height: 28px; }
   .dropdown-item:hover { background: var(--btn-hover); }
-  .dropdown-item input[type="checkbox"] { accent-color: var(--accent-gold); cursor: pointer; width: 13px; height: 13px; margin: 0; }
-  .dropdown-item span { font-size: 11px; color: var(--text-main); user-select: none; font-weight: 600; }
+  .dropdown-item input[type="checkbox"] { accent-color: var(--accent-gold); cursor: pointer; width: 14px; height: 14px; margin: 0; flex-shrink: 0; }
+  .dropdown-item span { font-size: 11.5px; color: var(--text-main); user-select: none; font-weight: 600; }
   .dropdown-search { padding-bottom: 6px; border-bottom: 1px solid var(--glass-border); margin-bottom: 6px; position: sticky; top: 0; background: var(--card-bg); z-index: 2; }
-  .dropdown-search input { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 6px; padding: 0 10px; height: 28px; color: var(--text-main); font-size: 11px; outline: none; }
+  .dropdown-search input { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 6px; padding: 0 10px; height: 30px; color: var(--text-main); font-size: 11px; outline: none; }
   .dropdown-search input:focus { border-color: var(--accent-gold); }
 
   /* Custom Toggle Switch */
@@ -652,7 +764,7 @@
   .secondary-filters-content .filter-group { flex: 1; min-width: 140px; }
 
   /* Scroll Exclusivo del Dashboard */
-  #tab-dashboard .scroll-area { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 24px; }
+  #tab-dashboard .scroll-area { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 24px; position: relative; z-index: 1; }
   
   .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 14px 24px 0; }
   @media(max-width:1100px) { .kpi-grid { grid-template-columns: 1fr; } }
@@ -836,6 +948,8 @@
     align-items: center;
     background: var(--card-bg);
     border-bottom: 1px solid var(--glass-border);
+    position: relative;
+    z-index: 500;
   }
   .search-box { flex: 1; min-width: 180px; position: relative; }
   .search-box input { padding-left: 34px; height: 34px; width: 100%; }
@@ -866,7 +980,7 @@
     box-shadow: 0 6px 16px var(--accent-glow);
   }
 
-  #tab-listado .table-wrap { flex: 1; overflow: auto; padding: 0 24px 24px; background: transparent; }
+  #tab-listado .table-wrap { flex: 1; overflow: auto; padding: 0 24px 24px; background: transparent; position: relative; z-index: 1; }
   .table-info { font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; padding-top: 10px; font-weight: 600; }
   
   table { min-width: 1050px; }
@@ -898,8 +1012,14 @@
   .currency { font-weight: 700; }
 
   /* ==================== TAB 3: COMPARADOR ==================== */
-  #tab-comparador .comp-sticky-area { flex-shrink: 0; padding: 12px 24px 8px; background: transparent; }
-  #tab-comparador .comparador-container { flex: 1; overflow-y: auto; padding: 0 24px 24px; }
+  #tab-comparador .comp-sticky-area {
+    flex-shrink: 0;
+    padding: 12px 24px 8px;
+    background: transparent;
+    position: relative;
+    z-index: 500;
+  }
+  #tab-comparador .comparador-container { flex: 1; overflow-y: auto; padding: 0 24px 24px; position: relative; z-index: 1; }
   .comparador-header-box {
     display: flex;
     align-items: center;
@@ -913,6 +1033,9 @@
     gap: 10px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 500;
+    overflow: visible;
   }
   .comparador-header-box:hover { border-color: var(--accent-gold); }
   .comparador-header-box h3 {
@@ -949,7 +1072,16 @@
   .comp-canvas-wrap { position: relative; height: 220px; }
   
   /* ==================== TAB 4: PLANIFICADOR ==================== */
-  #tab-planificador .pl-sticky-area { flex-shrink: 0; padding: 12px 24px 8px; background: transparent; display: flex; flex-direction: column; gap: 8px; }
+  #tab-planificador .pl-sticky-area {
+    flex-shrink: 0;
+    padding: 12px 24px 8px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    z-index: 500;
+  }
   .pl-header { display: flex; justify-content: flex-end; align-items: center; }
   
   .pl-filters {
@@ -963,12 +1095,23 @@
     gap: 10px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 500;
+    overflow: visible;
   }
   .pl-filters:hover { border-color: var(--accent-gold); }
   .pl-filter-col { display: flex; flex-direction: column; justify-content: center; }
   .pl-label { margin-bottom: 4px; }
   
-  #tab-planificador .pl-container { flex: 1; display: flex; flex-direction: column; min-height: 0; padding: 8px 24px 24px; }
+  #tab-planificador .pl-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 8px 24px 24px;
+    position: relative;
+    z-index: 1;
+  }
   .pl-table-wrap {
     flex: 1;
     overflow: auto;
@@ -977,6 +1120,8 @@
     backdrop-filter: blur(10px);
     border-radius: var(--radius-lg);
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
   }
   .pl-table { min-width: 1400px; }
   
@@ -1100,7 +1245,7 @@
 <!-- CABECERA PRINCIPAL CON LOGO A LA IZQUIERDA -->
 <div class="header">
   <div class="header-brand">
-    <img src="LOGO.png" alt="Logo de la Empresa" class="header-logo">
+    <img src="LOGO.png" alt="Logo de la Empresa" class="header-logo" onclick="showStartScreen()" title="Volver a la pantalla de inicio">
     <div class="header-left">
       <h1>Hub Bodega PAV <span class="accent-dot">·</span> <span id="dynamic-title" style="color: var(--accent-gold); font-weight: 700;">Dashboard Gráfico</span></h1>
       <div class="header-sub" id="header-period">Esperando datos...</div> 
@@ -1114,23 +1259,15 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
           </button>
 
-          <!-- BOTÓN Y SELECTOR DE LAS 6 PALETAS DE COLORES -->
-          <button class="top-icon-btn" onclick="toggleTheme()" title="Alternar Paleta de Color">
+          <!-- BOTÓN DE PALETA DE COLORES (SIN RECUADRO DE TEXTO) -->
+          <button class="top-icon-btn" onclick="toggleTheme()" title="Cambiar Tema de Color">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.992 6.012 17.5 2 12 2z"></path></svg>
           </button>
-          <select id="theme-selector" class="theme-select" onchange="changeTheme(this.value)" title="Seleccionar Paleta de Color">
-              <option value="dark" selected>Bosque & Dorado</option>
-              <option value="light">Claro Crema</option>
-              <option value="theme-gray">Escala de Grises</option>
-              <option value="theme-blue">Azul Cielo</option>
-              <option value="theme-pink">Rosado Elegante</option>
-              <option value="theme-green">Verde Institucional</option>
-          </select>
 
           <div class="divider-v"></div>
           <div style="display:flex; gap:4px;">
-              <button id="btn-admin" class="btn-company active" onclick="setEmpresa('ADMIN')">🏢 Administradora</button>
-              <button id="btn-inmob" class="btn-company" onclick="setEmpresa('INMOB')">🏘️ Inmobiliaria</button>
+              <button id="btn-admin" class="btn-company active" onclick="handleHeaderCompanyClick('ADMIN')">🏢 Administradora</button>
+              <button id="btn-inmob" class="btn-company" onclick="handleHeaderCompanyClick('INMOB')">🏘️ Inmobiliaria</button>
           </div>
           <div class="divider-v"></div>
           <div style="display:flex; gap:4px;">
@@ -1152,10 +1289,36 @@
   </div>
 </div>
 
-<!-- ESTADO INICIAL VACÍO -->
+<!-- PANTALLA DE INICIO: SELECCIÓN DE CENTRO DE COSTO Y CARGA AUTOMÁTICA DE EXCEL -->
 <div id="welcome-message">
-  <h2 id="welcome-title">Carga un archivo Excel de Administradora</h2>
-  <p style="margin-top:10px; font-size: 14px;">El sistema procesará automáticamente todas las métricas, alertas y la planificación de compras para el centro de costo elegido.</p>
+  <div class="start-screen-box">
+    <h2 id="welcome-title">Selecciona tu Centro de Costo</h2>
+    <div class="start-screen-sub">Elige la unidad operativa para cargar el archivo Excel y comenzar</div>
+    
+    <div class="start-cards-grid">
+      <!-- TARJETA ADMINISTRADORA -->
+      <div class="start-card" onclick="selectCostCenterAndUpload('ADMIN')">
+        <div class="start-card-icon">🏢</div>
+        <div class="start-card-title">Administradora</div>
+        <div class="start-card-desc">Gestión de stock, consumos, alertas logísticas y planificación de Administradora Los Parques.</div>
+        <div class="start-card-cta">📥 Seleccionar y Cargar Excel</div>
+        <button id="btn-restore-admin" class="start-card-memory-btn hidden" onclick="event.stopPropagation(); setEmpresa('ADMIN', true);">
+          📂 Usar datos guardados en memoria
+        </button>
+      </div>
+
+      <!-- TARJETA INMOBILIARIA -->
+      <div class="start-card" onclick="selectCostCenterAndUpload('INMOB')">
+        <div class="start-card-icon">🏘️</div>
+        <div class="start-card-title">Inmobiliaria</div>
+        <div class="start-card-desc">Gestión de stock, consumos, alertas logísticas y planificación de Inmobiliaria Los Parques.</div>
+        <div class="start-card-cta">📥 Seleccionar y Cargar Excel</div>
+        <button id="btn-restore-inmob" class="start-card-memory-btn hidden" onclick="event.stopPropagation(); setEmpresa('INMOB', true);">
+          📂 Usar datos guardados en memoria
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- CONTENEDOR PRINCIPAL FLUIDO -->
@@ -1373,7 +1536,7 @@
         <div style="display: flex; gap: 10px; flex: 1; justify-content: flex-end; align-items:center;">
           <div class="filter-group" style="min-width: 320px; max-width: 500px; margin:0;">
             <button class="dropdown-btn" id="btn-flt-comparador" onclick="toggleDropdown('dropdown-comparador')" style="border-color: var(--accent-gold);">Buscar y seleccionar productos...</button>
-            <div class="dropdown-content" id="dropdown-comparador">
+            <div class="dropdown-content" id="dropdown-comparador" style="width: 100%; max-width: 500px;">
               <div class="dropdown-search"><input type="text" placeholder="Buscar por código o nombre..." oninput="renderComparadorList(this.value)"></div>
               <div class="dropdown-list" id="list-flt-comparador"></div>
             </div>
@@ -1659,6 +1822,17 @@ const COL_CECO = ['Ceco Code', 'Centro de costo', 'CECO'];
 const COL_NAT = ['Naturaleza transacción', 'Naturaleza transaccion', 'Naturaleza'];
 const COL_COMP = ['Cód. comprador/vendedor', 'Comprador/vendedor', 'Comprador', 'Vendedor'];
 
+/* REGLA DE FILTRADO DE PROVEEDORES NO VÁLIDOS (MJEREZ Y V BEROIZA) */
+function isValidProveedor(name) {
+    if (!name) return false;
+    const clean = String(name).trim().toUpperCase().replace(/\s+/g, ' ');
+    if (!clean || clean === 'SIN ESPECIFICAR') return false;
+    const invalidExact = ['MJEREZ', 'M JEREZ', 'M.JEREZ', 'M. JEREZ', 'V BEROIZA', 'VBEROIZA', 'V.BEROIZA', 'V. BEROIZA'];
+    if (invalidExact.includes(clean)) return false;
+    if (clean.includes('MJEREZ') || clean.includes('BEROIZA')) return false;
+    return true;
+}
+
 const getCssVar = (name, fallback) => {
     const val = getComputedStyle(document.body).getPropertyValue(name).trim();
     return val ? val : fallback;
@@ -1683,9 +1857,6 @@ function applyThemeClass(themeName) {
     document.body.classList.remove('light-mode', 'theme-gray', 'theme-blue', 'theme-pink', 'theme-green');
     if (themeName === 'light') document.body.classList.add('light-mode');
     else if (themeName !== 'dark') document.body.classList.add(themeName);
-    
-    const sel = document.getElementById('theme-selector');
-    if (sel && sel.value !== themeName) sel.value = themeName;
 }
 
 function changeTheme(themeName) {
@@ -1786,7 +1957,6 @@ function getDiasBar(dias) {
   return `<div class="dias-cell"><span class="num">${Math.round(dias) === 999 ? '999+' : Math.round(dias)}</span><div class="dias-bar"><div class="dias-bar-fill" style="width:${pct}%;background:${color}"></div></div></div>`;
 }
 
-// MODAL DE DETALLE DE PRODUCTO INDIVIDUAL
 function showProductModal(codigo) {
     const meta = GLOBAL_METADATA.get(codigo) || { descripcion: codigo };
     document.getElementById('modal-title').textContent = codigo;
@@ -1823,8 +1993,38 @@ function closeModal() {
 }
 
 /* =====================================================================
-   3. DOM & UI GLOBALES (Selector de Empresa y Reset)
+   3. PANTALLA DE INICIO, SELECTOR DE EMPRESA Y CONTROLES UI
 ===================================================================== */
+function updateStartScreenMemoryButtons() {
+    const btnAdmin = document.getElementById('btn-restore-admin');
+    const btnInmob = document.getElementById('btn-restore-inmob');
+    if (btnAdmin) btnAdmin.classList.toggle('hidden', !(RAW_EXCEL_ADMIN && RAW_EXCEL_ADMIN.length > 0));
+    if (btnInmob) btnInmob.classList.toggle('hidden', !(RAW_EXCEL_INMOB && RAW_EXCEL_INMOB.length > 0));
+}
+
+function showStartScreen() {
+    updateStartScreenMemoryButtons();
+    document.getElementById('main-content').classList.add('hidden');
+    document.getElementById('welcome-message').classList.remove('hidden');
+}
+
+function selectCostCenterAndUpload(empresa) {
+    CURRENT_EMPRESA = empresa;
+    document.getElementById('btn-admin').classList.toggle('active', empresa === 'ADMIN');
+    document.getElementById('btn-inmob').classList.toggle('active', empresa === 'INMOB');
+    const fileInput = document.getElementById(empresa === 'ADMIN' ? 'excel-upload-admin' : 'excel-upload-inmob');
+    if (fileInput) fileInput.click();
+}
+
+function handleHeaderCompanyClick(empresa) {
+    const targetData = empresa === 'ADMIN' ? RAW_EXCEL_ADMIN : RAW_EXCEL_INMOB;
+    if (!targetData || targetData.length === 0) {
+        selectCostCenterAndUpload(empresa);
+    } else {
+        setEmpresa(empresa, true);
+    }
+}
+
 function setEmpresa(empresa, force = false) {
    if(CURRENT_EMPRESA === empresa && !force) return;
    CURRENT_EMPRESA = empresa;
@@ -1835,8 +2035,6 @@ function setEmpresa(empresa, force = false) {
    RAW_EXCEL_ROWS = empresa === 'ADMIN' ? RAW_EXCEL_ADMIN : RAW_EXCEL_INMOB;
    PLANNER_DATA = empresa === 'ADMIN' ? PLANNER_DATA_ADMIN : PLANNER_DATA_INMOB;
    PLANNER_DISCONTINUED = empresa === 'ADMIN' ? DISCONTINUED_ADMIN : DISCONTINUED_INMOB;
-   
-   document.getElementById('welcome-title').textContent = `Carga un archivo Excel de ${empresa === 'ADMIN' ? 'Administradora' : 'Inmobiliaria'}`;
    
    SELECTED_COMPARADOR = []; document.getElementById('lst-search').value = ''; document.getElementById('pl-search-bar').value = '';
    
@@ -1850,7 +2048,7 @@ function setEmpresa(empresa, force = false) {
        document.getElementById('welcome-message').classList.add('hidden'); document.getElementById('main-content').classList.remove('hidden');
    } else {
        document.getElementById('upload-status').innerHTML = `<span style="color:var(--text-muted)">Esperando archivo de ${empresa === 'ADMIN' ? 'Administradora' : 'Inmobiliaria'}...</span>`;
-       document.getElementById('main-content').classList.add('hidden'); document.getElementById('welcome-message').classList.remove('hidden');
+       showStartScreen();
    }
 }
 
@@ -1867,9 +2065,8 @@ function clearAllData() {
         DISCONTINUED_ADMIN = {}; DISCONTINUED_INMOB = {}; PLANNER_DISCONTINUED = {};
         clearDB(); 
         
-        document.getElementById('upload-status').innerHTML = '<span style="color:var(--text-muted)">Datos borrados. Esperando archivo...</span>';
-        document.getElementById('main-content').classList.add('hidden');
-        document.getElementById('welcome-message').classList.remove('hidden');
+        document.getElementById('upload-status').innerHTML = '<span style="color:var(--text-muted)">Datos borrados. Selecciona un centro de costo...</span>';
+        showStartScreen();
     }
 }
 
@@ -1916,7 +2113,7 @@ function updatePlannerDropdownText(groupId, listId) {
     
     if (vals.length === 0) { btn.textContent = 'Todas las familias'; } 
     else if (vals.length === 1) { btn.textContent = truncateString(vals[0], 25); } 
-    else { btn.textContent = `${vals.length} opciones seleccionadas`; }
+    else { btn.textContent = `${vals.length} opciones`; }
     
     extractPlannerDataFromGlobal();
 }
@@ -2104,7 +2301,7 @@ function processData(jsonData, realStockMap) {
     if (tipoMov.includes('COMPRA') || docTipo.includes('RECEPCI')) {
         prod.total_comprado += cantidad;
         const comp = String(getCol(row, COL_COMP) || '').trim().toUpperCase();
-        if (comp && comp !== 'SIN ESPECIFICAR') prod.proveedores.add(comp);
+        if (isValidProveedor(comp)) prod.proveedores.add(comp);
     }
     else if (tipoMov === 'VENTA' || tipoMov.includes('NEGATIVO') || tipoMov === 'CONSUMO') {
       prod.consumos_negativos += Math.abs(cantidad);
@@ -2181,7 +2378,7 @@ function processData(jsonData, realStockMap) {
     let provs = Array.from(p.proveedores);
     if (PENDING_ORDERS[p.codigo]) {
         PENDING_ORDERS[p.codigo].forEach(o => {
-            if(o.empresa && o.empresa.trim() !== '') provs.push(o.empresa.toUpperCase().trim());
+            if(o.empresa && isValidProveedor(o.empresa)) provs.push(o.empresa.toUpperCase().trim());
         });
     }
     let uniqueProvs = [...new Set(provs)].sort();
@@ -2337,7 +2534,11 @@ function initListadoDropdowns() {
     
     PROCESSED_DATA.forEach(p => {
         if (p.familia) familias.add(p.familia);
-        if (p.proveedores_array) p.proveedores_array.forEach(prov => proveedores.add(prov));
+        if (p.proveedores_array) {
+            p.proveedores_array.forEach(prov => {
+                if (isValidProveedor(prov)) proveedores.add(prov);
+            });
+        }
     });
     
     const fSelect = document.getElementById('lst-familia');
@@ -2395,10 +2596,8 @@ function updateDashboardKPIs(processedResult) {
 
   document.getElementById('welcome-message').classList.add('hidden'); document.getElementById('main-content').classList.remove('hidden');
 
-  // Chart: Distribución Capital ABC
   renderPieChart('chart-abc', ['Clase A', 'Clase B', 'Clase C'], [valA, valB, valC], [getCssVar('--sys-green'), getCssVar('--sys-yellow'), getCssVar('--text-muted')], false);
 
-  // Chart: Pareto
   const paretoData = [...PROCESSED_DATA].sort((a,b) => (b.consumos_negativos * b.precio_unitario) - (a.consumos_negativos * a.precio_unitario)).slice(0, 50).filter(p => p.consumos_negativos > 0);
   const paretoLabels = paretoData.map(p => `[${p.codigo}] ${truncateString(p.descripcion, 20)}`);
   const paretoBars = paretoData.map(p => p.consumos_negativos * p.precio_unitario);
@@ -2419,7 +2618,6 @@ function updateDashboardKPIs(processedResult) {
   const tlData = tlLabelsRaw.map(k => timelineMap.get(k)); 
   renderLineChart('chart-timeline', tlLabels, tlData, 'Frecuencia de Salidas', getCssVar('--accent-gold'), tlLabelsRaw);
   
-  // Procesar Solicitantes
   const buyersMap = new Map();
   CURRENT_FILTERED_ROWS.forEach(row => {
       const tipoMov = String(getCol(row, COL_MOV) || '').trim().toUpperCase();
@@ -2924,13 +3122,13 @@ function updateProveedorDropdown() {
         const docTipo = String(getCol(row, COL_DOC_TIPO) || '').toUpperCase();
         if (tipoMov.includes('COMPRA') || docTipo.includes('RECEPCIÓN') || docTipo.includes('RECEPCION')) {
             const comp = String(getCol(row, COL_COMP) || '').trim().toUpperCase();
-            if (comp && comp !== 'SIN ESPECIFICAR') proveedores.add(comp);
+            if (isValidProveedor(comp)) proveedores.add(comp);
         }
     });
 
     Object.values(PENDING_ORDERS).forEach(orders => {
         orders.forEach(o => {
-            if (o.empresa && o.empresa.trim() !== '') proveedores.add(o.empresa.toUpperCase());
+            if (o.empresa && isValidProveedor(o.empresa)) proveedores.add(o.empresa.toUpperCase().trim());
         });
     });
 
@@ -3021,7 +3219,7 @@ function extractPlannerDataFromGlobal() {
 
         if (tipoMov.includes('COMPRA') || tipoDoc.includes('RECEPCIÓN') || tipoDoc.includes('RECEPCION')) {
             const comp = String(getCol(row, COL_COMP) || '').trim().toUpperCase();
-            if (comp && comp !== 'SIN ESPECIFICAR') map[key].proveedoresHist.add(comp);
+            if (isValidProveedor(comp)) map[key].proveedoresHist.add(comp);
         }
 
         if (tipoDoc.includes('RECEPCIÓN DE COMPRA') || tipoDoc.includes('RECEPCION DE COMPRA')) {
@@ -3098,7 +3296,7 @@ function getPlannerEvaluatedData() {
         if (PENDING_ORDERS[p.code]) {
             PENDING_ORDERS[p.code].forEach(order => {
                 enTransito += order.pendiente;
-                if(order.empresa) pProveedoresOC.add(order.empresa.toUpperCase());
+                if(order.empresa && isValidProveedor(order.empresa)) pProveedoresOC.add(order.empresa.toUpperCase().trim());
             });
         }
         p.enTransito = enTransito;
@@ -3296,6 +3494,7 @@ if(cc) {
     });
 }
 
+/* EXPORTACIÓN PLANIFICADOR CON REGLA ESPECIAL PARA CÓDIGOS PUL Y REL */
 const peb = document.getElementById('pl-export-btn');
 if(peb) {
     peb.addEventListener('click', () => {
@@ -3337,12 +3536,22 @@ if(peb) {
                 
                 row.push(p.avg, p.avgReceiptDays !== null ? Math.round(p.avgReceiptDays) : 'N/A', p.sugerido, p.stock, p.enTransito, qty);
                 
-                let basePerMonth = Math.floor(qty / suggestMonths);
-                let remainder = qty % suggestMonths;
-                
-                for(let i=1; i<=suggestMonths; i++) {
-                    let monthQty = basePerMonth + (i <= remainder ? 1 : 0);
-                    row.push(monthQty);
+                // REGLA: Códigos que comienzan con PUL o REL quedan programados 100% en el primer mes sin dividir
+                const codeUpper = String(p.code || '').trim().toUpperCase();
+                const isSingleMonthRule = codeUpper.startsWith('PUL') || codeUpper.startsWith('REL');
+
+                if (isSingleMonthRule) {
+                    for(let i=1; i<=suggestMonths; i++) {
+                        row.push(i === 1 ? qty : 0);
+                    }
+                } else {
+                    let basePerMonth = Math.floor(qty / suggestMonths);
+                    let remainder = qty % suggestMonths;
+                    
+                    for(let i=1; i<=suggestMonths; i++) {
+                        let monthQty = basePerMonth + (i <= remainder ? 1 : 0);
+                        row.push(monthQty);
+                    }
                 }
                 aoa.push(row);
             }
@@ -3387,6 +3596,7 @@ function handleFile(file, type) {
                     if (type === 'ADMIN') { RAW_EXCEL_ADMIN = parsedRows; saveToDB('ADMIN', parsedRows); }
                     else { RAW_EXCEL_INMOB = parsedRows; saveToDB('INMOB', parsedRows); }
                     
+                    updateStartScreenMemoryButtons();
                     setEmpresa(type, true); 
                     document.getElementById('upload-status').innerHTML = `<span style="color:var(--sys-green)">✅ ${type} Cargado (${fmt(parsedRows.length)} reg.)</span>`;
                 } else {
@@ -3484,8 +3694,10 @@ async function fetchOCsFromGoogle(silent = false) {
                             }
                         }
 
+                        const cleanEmpresa = isValidProveedor(empresaName) ? empresaName.toUpperCase().trim() : '';
+
                         PENDING_ORDERS[code].push({
-                            empresa: empresaName.toUpperCase(),
+                            empresa: cleanEmpresa,
                             oc: cols.oc !== -1 ? String(row[cols.oc] || 'S/N') : 'S/N',
                             solicitado: cols.solicitado !== -1 ? parseFloat(row[cols.solicitado]) || 0 : 0,
                             recibido: cols.recibido !== -1 ? parseFloat(row[cols.recibido]) || 0 : 0,
@@ -3542,7 +3754,7 @@ applyContrastMode();
 updateChartColors();
 
 window.addEventListener('DOMContentLoaded', async () => {
-    document.getElementById('upload-status').innerHTML = `<span style="color:var(--sys-yellow)">⏳ Restaurando memoria de bodega...</span>`;
+    document.getElementById('upload-status').innerHTML = `<span style="color:var(--sys-yellow)">⏳ Verificando memoria de bodega...</span>`;
     
     const adminData = await getFromDB('ADMIN');
     const inmobData = await getFromDB('INMOB');
@@ -3550,16 +3762,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     const provData = await getFromDB('PROVEEDORES');
     if (provData) PENDING_ORDERS = provData;
 
-    let hasData = false;
-    if (adminData && adminData.length > 0) { RAW_EXCEL_ADMIN = adminData; hasData = true; }
-    if (inmobData && inmobData.length > 0) { RAW_EXCEL_INMOB = inmobData; hasData = true; }
+    if (adminData && adminData.length > 0) RAW_EXCEL_ADMIN = adminData;
+    if (inmobData && inmobData.length > 0) RAW_EXCEL_INMOB = inmobData;
 
-    if (hasData) {
-        const defaultEmpresa = (RAW_EXCEL_ADMIN.length > 0) ? 'ADMIN' : 'INMOB';
-        setEmpresa(defaultEmpresa, true);
-        document.getElementById('upload-status').innerHTML = `<span style="color:var(--sys-green)">✅ Datos recuperados de la memoria local.</span>`;
+    updateStartScreenMemoryButtons();
+    showStartScreen();
+
+    if ((RAW_EXCEL_ADMIN && RAW_EXCEL_ADMIN.length > 0) || (RAW_EXCEL_INMOB && RAW_EXCEL_INMOB.length > 0)) {
+        document.getElementById('upload-status').innerHTML = `<span style="color:var(--sys-green)">✅ Elige centro de costo para cargar Excel o usar memoria.</span>`;
     } else {
-        document.getElementById('upload-status').innerHTML = `<span style="color:var(--text-muted)">Esperando archivos...</span>`;
+        document.getElementById('upload-status').innerHTML = `<span style="color:var(--text-muted)">Selecciona un centro de costo para adjuntar Excel...</span>`;
     }
 
     setInterval(() => {
