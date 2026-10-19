@@ -11,7 +11,7 @@
 <!-- Tipografías Corporativas -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Dancing+Script:wght@400;500&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Dancing+Script:wght@400;500&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   /* ==============================================================
@@ -21,6 +21,9 @@
     --font-main: 'Nunito', -apple-system, sans-serif;
     --font-title: 'Cormorant Garamond', serif;
     --font-subtitle: 'Cinzel', serif;
+    --font-calibri: Calibri, Carlito, 'Segoe UI', Arial, sans-serif;
+    --font-num: var(--font-calibri);
+    --on-accent: #0B1411;
     --radius-sm: 6px;
     --radius-md: 8px;
     --radius-lg: 12px;
@@ -213,37 +216,7 @@
     --chart-6: #0284c7; --chart-7: #16a34a; --chart-8: #0d9488; --chart-9: #1C452D; --chart-10: #A3C9B3;
   }
 
-  /* ==============================================================
-     MODOS DE ACCESIBILIDAD Y CONTRASTE (NIVEL 1 Y NIVEL 2)
-     ============================================================== */
-  body.contrast-1 { font-weight: 700; }
-  body.contrast-1 .pill-ok, body.contrast-1 .oc-ok { color: #0055ff !important; font-weight: 900 !important; }
-  body.contrast-1 .pill-stagnant, body.contrast-1 .oc-urgente { color: #d90000 !important; font-weight: 900 !important; }
-  body.contrast-1 .oc-pronto { color: #ff8800 !important; font-weight: 900 !important; }
-  body.contrast-1 .pill-a { background: #0055ff !important; color: #ffffff !important; border-color: #0033aa !important; }
-  body.contrast-1 .pill-b { background: #ff8800 !important; color: #000000 !important; border-color: #cc6600 !important; }
-  body.contrast-1 .pill-c { background: #8800ff !important; color: #ffffff !important; border-color: #5500aa !important; }
-
-  body.contrast-2 { font-weight: 800; }
-  body.contrast-2:not(.light-mode):not(.theme-gray):not(.theme-blue):not(.theme-pink):not(.theme-green) {
-    --text-main: #FFFFFF; --text-muted: #CCCCCC; --glass-border: #FFFFFF; --input-border: #FFFFFF; --accent-gold: #FFD700;
-  }
-  body.contrast-2.light-mode, body.contrast-2.theme-gray, body.contrast-2.theme-blue, body.contrast-2.theme-pink, body.contrast-2.theme-green {
-    --text-main: #000000; --text-muted: #222222; --glass-border: #000000; --input-border: #000000; --header-title: #000000; --accent-gold: #000000;
-  }
-  body.contrast-2 .filters-box, body.contrast-2 .kpi-card, body.contrast-2 .chart-box, body.contrast-2 .comparador-header-box, body.contrast-2 .comp-chart-card, body.contrast-2 .pl-filters, body.contrast-2 .pl-table-wrap, body.contrast-2 .modal-content, body.contrast-2 .start-card {
-    border: 2px solid var(--text-main) !important; background: var(--bg-body) !important; box-shadow: none !important;
-  }
-  body.contrast-2 th, body.contrast-2 .top-table th, body.contrast-2 #tab-planificador th {
-    background: var(--text-main) !important; color: var(--bg-body) !important; border-bottom: 3px solid var(--text-main) !important;
-  }
-  body.contrast-2 td { border-bottom: 1px solid var(--text-muted) !important; }
-  body.contrast-2 .dropdown-btn, body.contrast-2 .search-box input, body.contrast-2 .pl-select, body.contrast-2 .pl-input, body.contrast-2 .local-sort {
-    border: 2px solid var(--text-main) !important; background: transparent !important; color: var(--text-main) !important;
-  }
-  body.contrast-2 .pill-ok, body.contrast-2 .oc-ok { background: #000 !important; color: #00FF00 !important; padding: 2px 6px; border: 2px solid #00FF00 !important; text-decoration: underline; }
-  body.contrast-2 .pill-stagnant, body.contrast-2 .oc-urgente { background: #000 !important; color: #FF3333 !important; padding: 2px 6px; border: 2px solid #FF3333 !important; text-decoration: underline; }
-  body.contrast-2 .oc-pronto { background: #000 !important; color: #FFFF00 !important; padding: 2px 6px; border: 2px solid #FFFF00 !important; }
+  body.light-mode, body.theme-gray, body.theme-blue, body.theme-pink, body.theme-green { --on-accent: #FFFFFF; }
 
   /* ==============================================================
      2. ARQUITECTURA FLEXBOX NATIVA Y DISEÑO GLASSMORPHISM
@@ -357,57 +330,9 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
 
-  .btn-company {
-    background: transparent;
-    color: var(--text-muted);
-    border: 1px solid transparent;
-    padding: 4px 10px;
-    border-radius: var(--radius-sm);
-    font-size: 10px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    height: 28px;
-  }
-  .btn-company:hover { color: var(--text-main); background: var(--btn-hover); }
-  .btn-company.active {
-    background: var(--accent-gold);
-    color: #111111;
-    border-color: var(--accent-gold);
-    box-shadow: 0 4px 12px var(--accent-glow);
-  }
   
   .divider-v { width: 1px; height: 16px; background: var(--glass-border); margin: 0 2px; }
 
-  .btn-upload {
-    background: var(--btn-bg);
-    color: var(--text-main);
-    border: 1px solid var(--input-border);
-    padding: 4px 10px;
-    border-radius: var(--radius-sm);
-    font-size: 10px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    height: 28px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .btn-upload:hover {
-    background: var(--accent-gold);
-    color: #111111;
-    border-color: var(--accent-gold);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--accent-glow);
-  }
   
   .btn-clear {
     background: transparent;
@@ -428,7 +353,7 @@
   }
   .btn-clear:hover { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); }
 
-  #upload-status { font-size: 10px; color: var(--text-muted); text-align: right; font-weight: 700; font-family: monospace; }
+  #upload-status { font-size: 10px; color: var(--text-muted); text-align: right; font-weight: 700; font-family: var(--font-num); }
 
   /* ==============================================================
      PANTALLA DE INICIO (SELECCIÓN DE CENTRO DE COSTO Y CARGA)
@@ -449,41 +374,24 @@
     text-align: center;
     animation: fadeIn 0.4s ease;
   }
-  .start-screen-box h2 {
-    font-family: var(--font-title);
-    color: var(--header-title);
-    font-weight: 700;
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
-  }
-  .start-screen-sub {
-    font-family: var(--font-subtitle);
-    font-size: 0.75rem;
-    color: var(--accent-gold);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 32px;
-  }
   .start-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin-bottom: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 300px));
+    justify-content: center;
+    gap: 28px;
   }
   .start-card {
     background: var(--card-bg);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-lg);
-    padding: 32px 24px;
+    padding: 38px 24px 32px;
+    min-height: 270px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 10px 35px rgba(0,0,0,0.25);
@@ -505,63 +413,6 @@
     box-shadow: 0 16px 40px rgba(0,0,0,0.4);
   }
   .start-card:hover::before { opacity: 1; }
-  .start-card-icon {
-    font-size: 42px;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .start-card-title {
-    font-family: var(--font-title);
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--header-title);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .start-card-desc {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.4;
-    max-width: 260px;
-  }
-  .start-card-cta {
-    margin-top: 8px;
-    background: var(--accent-gold);
-    color: #111111;
-    font-weight: 800;
-    font-size: 11px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 14px var(--accent-glow);
-    transition: all 0.2s ease;
-  }
-  .start-card:hover .start-card-cta {
-    background: #ffffff;
-    transform: scale(1.03);
-  }
-  .start-card-memory-btn {
-    margin-top: 6px;
-    background: var(--input-bg);
-    color: var(--text-main);
-    border: 1px solid var(--glass-border);
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: all 0.2s;
-  }
-  .start-card-memory-btn:hover {
-    border-color: var(--accent-gold);
-    color: var(--accent-gold);
-  }
 
   #main-content { flex: 1; display: flex; flex-direction: column; min-height: 0; }
   .hidden { display: none !important; }
@@ -852,7 +703,7 @@
   }
   .btn-toggle-charts:hover {
     background: var(--accent-gold);
-    color: #111111;
+    color: var(--on-accent);
     border-color: var(--accent-gold);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px var(--accent-glow);
@@ -896,7 +747,7 @@
     letter-spacing: 0.05em;
   }
   .btn-view-all:hover {
-    color: #111111;
+    color: var(--on-accent);
     background: var(--accent-gold);
     border-color: var(--accent-gold);
   }
@@ -958,7 +809,7 @@
   .filter-btn, .pl-btn-export {
     padding: 0 16px;
     background: var(--accent-gold);
-    color: #111111;
+    color: var(--on-accent);
     font-weight: 800;
     font-size: 10.5px;
     border-radius: 8px;
@@ -993,7 +844,7 @@
   .clickable-desc:hover { filter: brightness(1.25); text-decoration: underline; }
 
   /* Badges & Pills */
-  .code-badge { font-weight: 800; font-family: monospace; letter-spacing: 0.5px; font-size: 11px; }
+  .code-badge { font-weight: 800; font-family: var(--font-num); letter-spacing: 0.5px; font-size: 11px; }
   .pill-stagnant { display: inline-flex; align-items: center; gap: 4px; color: var(--sys-red); font-size: 9.5px; font-weight: 800; text-transform: uppercase; }
   .pill-ok { display: inline-flex; align-items: center; gap: 4px; color: var(--sys-green); font-size: 9.5px; font-weight: 800; text-transform: uppercase; }
   .pill-abc { display: inline-flex; justify-content: center; align-items: center; width: 22px; height: 22px; border-radius: 4px; font-weight: 800; font-size: 10px; }
@@ -1008,7 +859,7 @@
   .dias-cell { display: flex; align-items: center; gap: 6px; }
   .dias-bar { width: 42px; height: 5px; border-radius: 3px; background: var(--input-bg); overflow: hidden; flex-shrink: 0; border: 1px solid var(--glass-border); }
   .dias-bar-fill { height: 100%; border-radius: 2px; }
-  .num { font-variant-numeric: tabular-nums; font-family: monospace; font-size: 12px; }
+  .num { font-variant-numeric: tabular-nums; font-family: var(--font-num); font-size: 12px; }
   .currency { font-weight: 700; }
 
   /* ==================== TAB 3: COMPARADOR ==================== */
@@ -1137,9 +988,9 @@
   .btn-discontinue:hover { filter: none; opacity: 1; transform: scale(1.2); }
   .discontinued-row .btn-discontinue { filter: none; opacity: 1; }
 
-  .pl-month-val { font-family: monospace; color: var(--text-muted); font-size: 11px; text-align: right; }
-  .pl-prom { color: var(--accent-gold); font-weight: 800; font-family: monospace; text-align: right; background: rgba(179, 146, 102, 0.08); }
-  .pl-sug { color: var(--sys-yellow); font-weight: 800; font-family: monospace; text-align: right; }
+  .pl-month-val { font-family: var(--font-num); color: var(--text-muted); font-size: 11px; text-align: right; }
+  .pl-prom { color: var(--accent-gold); font-weight: 800; font-family: var(--font-num); text-align: right; background: rgba(179, 146, 102, 0.08); }
+  .pl-sug { color: var(--sys-yellow); font-weight: 800; font-family: var(--font-num); text-align: right; }
   .pl-qty-input {
     width: 90px;
     background: var(--input-bg);
@@ -1150,7 +1001,7 @@
     text-align: right;
     border-radius: 6px;
     font-weight: 800;
-    font-family: monospace;
+    font-family: var(--font-num);
     transition: all 0.2s;
     font-size: 12px;
   }
@@ -1231,10 +1082,144 @@
   }
   .modal-kpi:hover { border-color: var(--accent-gold); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
   .modal-kpi span { font-size: 9px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; font-weight: 800; letter-spacing: 0.08em; }
-  .modal-kpi strong { font-size: 18px; color: var(--text-main); font-weight: 800; font-family: monospace; }
+  .modal-kpi strong { font-size: 18px; color: var(--text-main); font-weight: 800; font-family: var(--font-num); }
   .modal-kpi.full { grid-column: span 2; }
 
   .empty { text-align: center; padding: 40px; color: var(--text-muted); font-size: 12px; font-weight: 600; }
+
+  /* ==============================================================
+     CALIBRI EN HOJAS (Dashboard, Listado, Comparador, Planificador y ventanas)
+     ============================================================== */
+  #main-content, .modal-overlay {
+    --font-main: var(--font-calibri);
+    --font-title: var(--font-calibri);
+    --font-subtitle: var(--font-calibri);
+    font-family: var(--font-calibri);
+  }
+  #main-content button, #main-content input, #main-content select, #main-content textarea,
+  .modal-overlay button, .modal-overlay input, .modal-overlay select, .modal-overlay textarea { font-family: inherit; }
+  .num, td, th { font-variant-numeric: tabular-nums; }
+
+  /* ==============================================================
+     CABECERA: AJUSTES, ELIMINAR, ESTADO
+     ============================================================== */
+  .header-sub { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .header-cc {
+    background: var(--accent-gold); color: var(--on-accent);
+    padding: 2px 10px; border-radius: 999px; font-size: 0.62rem; letter-spacing: 0.14em;
+  }
+  .header-cc:empty { display: none; }
+  #upload-status:empty { display: none; }
+
+  .settings-wrap { position: relative; }
+  .settings-btn {
+    display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px 0 10px;
+    background: var(--btn-bg); color: var(--text-main);
+    border: 1px solid var(--glass-border); border-radius: var(--radius-sm);
+    font: 700 12px/1 var(--font-main); letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s ease;
+  }
+  .settings-btn svg { color: var(--accent-gold); }
+  .settings-btn:hover, .settings-btn[aria-expanded="true"] { border-color: var(--accent-gold); background: var(--btn-hover); }
+  .settings-btn .chev { transition: transform 0.2s ease; }
+  .settings-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+  .icon-danger-btn {
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    background: transparent; color: var(--sys-red); border: 1px solid transparent;
+    border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s ease;
+  }
+  .icon-danger-btn:hover { background: rgba(239, 68, 68, 0.14); border-color: rgba(239, 68, 68, 0.45); }
+
+  .settings-menu {
+    position: absolute; top: calc(100% + 8px); right: 0; width: 330px; max-width: calc(100vw - 24px);
+    background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+    box-shadow: 0 18px 48px rgba(0,0,0,0.35); padding: 4px; z-index: 3000;
+    transform-origin: top right; animation: menuIn 0.16s ease; text-align: left;
+  }
+  @keyframes menuIn { from { opacity: 0; transform: translateY(-6px) scale(0.98); } to { opacity: 1; transform: none; } }
+  .sm-section { padding: 12px 12px 14px; }
+  .sm-section + .sm-section { border-top: 1px solid var(--glass-border); }
+  .sm-label { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; }
+
+  .cc-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 10px; }
+  .cc-opt {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 9px 10px;
+    border-radius: 7px; border: 1px solid transparent; background: transparent; color: var(--text-main);
+    cursor: pointer; text-align: left; font: inherit; transition: all 0.18s ease;
+  }
+  .cc-opt strong { font-size: 12px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+  .cc-opt small { font-size: 10.5px; color: var(--text-muted); font-weight: 600; }
+  .cc-opt:hover { background: var(--btn-hover); }
+  .cc-opt.active { background: var(--accent-gold); color: var(--on-accent); box-shadow: 0 4px 12px var(--accent-glow); }
+  .cc-opt.active small { color: var(--on-accent); opacity: 0.85; }
+  .cc-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--text-muted); flex-shrink: 0; }
+  .cc-opt.has-data .cc-dot { background: var(--sys-green); border-color: var(--sys-green); }
+  .cc-opt.active .cc-dot { background: var(--on-accent); border-color: var(--on-accent); }
+
+  .theme-swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .theme-swatch {
+    width: 30px; height: 30px; border-radius: 50%; cursor: pointer; padding: 0;
+    background: linear-gradient(135deg, var(--sw-bg) 50%, var(--sw-ac) 50%);
+    border: 2px solid var(--glass-border); transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .theme-swatch:hover { transform: scale(1.12); }
+  .theme-swatch.active { box-shadow: 0 0 0 2px var(--card-bg), 0 0 0 4px var(--accent-gold); }
+
+  .sm-item {
+    display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 10px; margin-top: 2px;
+    background: transparent; color: var(--text-main); border: none; border-radius: 8px;
+    font: 600 12.5px var(--font-main); cursor: pointer; text-align: left; transition: background 0.15s ease;
+  }
+  .sm-item svg { color: var(--accent-gold); flex-shrink: 0; }
+  .sm-item:hover { background: var(--btn-hover); }
+
+  /* ==============================================================
+     PANTALLA DE INICIO: TARJETAS CON ILUSTRACIÓN
+     ============================================================== */
+  .start-card:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 3px; }
+  .start-card-art { width: 128px; height: 128px; color: var(--accent-gold); transition: transform 0.3s ease; }
+  .start-card:hover .start-card-art { transform: scale(1.07); }
+  .start-card-title {
+    font-family: var(--font-title); font-size: 26px; font-weight: 700; color: var(--header-title);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* TRANSICIÓN AL CAMBIAR DE CENTRO DE COSTO */
+  #main-content { transition: opacity 0.17s ease; }
+  #main-content.cc-switching { opacity: 0; }
+
+  /* ==============================================================
+     CONFIRMACIÓN DE ELIMINAR Y AVISO
+     ============================================================== */
+  .confirm-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(3px);
+    display: flex; align-items: center; justify-content: center; z-index: 5000; padding: 20px; animation: fadeIn 0.18s ease;
+  }
+  .confirm-box {
+    width: 100%; max-width: 420px; background: var(--card-bg); border: 1px solid var(--glass-border);
+    border-radius: 14px; padding: 28px 26px 24px; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+  .confirm-icon {
+    width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%;
+    background: rgba(239,68,68,0.14); color: var(--sys-red); display: flex; align-items: center; justify-content: center;
+  }
+  .confirm-box h3 { font-family: var(--font-main); font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 8px; }
+  .confirm-box p { font-size: 13px; line-height: 1.55; color: var(--text-muted); margin-bottom: 22px; }
+  .confirm-actions { display: flex; gap: 10px; }
+  .cf-btn { flex: 1; height: 40px; border-radius: 8px; font: 800 12px var(--font-main); letter-spacing: 0.04em; cursor: pointer; border: 1px solid var(--input-border); transition: all 0.18s ease; }
+  .cf-cancel { background: var(--btn-bg); color: var(--text-main); }
+  .cf-cancel:hover { background: var(--btn-hover); }
+  .cf-danger { background: #dc2626; color: #ffffff; border-color: #dc2626; }
+  .cf-danger:hover { background: #b91c1c; border-color: #b91c1c; }
+
+  #toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 12px);
+    background: var(--header-bg-solid); color: var(--text-main); border: 1px solid var(--glass-border);
+    border-left: 3px solid var(--accent-gold); padding: 10px 18px; border-radius: 10px;
+    font: 700 13px var(--font-main); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 0; pointer-events: none; transition: all 0.25s ease; z-index: 6000;
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
 </style>
 </head>
 <body>
@@ -1248,74 +1233,86 @@
     <img src="LOGO.png" alt="Logo de la Empresa" class="header-logo" onclick="showStartScreen()" title="Volver a la pantalla de inicio">
     <div class="header-left">
       <h1>Hub Bodega PAV <span class="accent-dot">·</span> <span id="dynamic-title" style="color: var(--accent-gold); font-weight: 700;">Dashboard Gráfico</span></h1>
-      <div class="header-sub" id="header-period">Esperando datos...</div> 
+      <div class="header-sub hidden" id="header-sub-row"><span class="header-cc" id="header-cc"></span><span id="header-period"></span></div>
     </div>
   </div>
   
   <div class="header-actions">
       <div class="action-row">
-          <!-- BOTÓN ACCESIBILIDAD VISUAL / DALTONISMO / CONTRASTE -->
-          <button id="btnContrast" class="top-icon-btn" onclick="toggleContrastMode()" title="Ajustar Nivel de Accesibilidad Visual (Normal / Daltonismo / Alto Contraste)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <div class="settings-wrap" id="settings-wrap">
+          <button id="btn-settings" class="settings-btn" type="button" onclick="toggleSettings(event)" aria-haspopup="true" aria-expanded="false" title="Ajustes">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Ajustes</span><svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-
-          <!-- BOTÓN DE PALETA DE COLORES (SIN RECUADRO DE TEXTO) -->
-          <button class="top-icon-btn" onclick="toggleTheme()" title="Cambiar Tema de Color">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.992 6.012 17.5 2 12 2z"></path></svg>
-          </button>
-
-          <div class="divider-v"></div>
-          <div style="display:flex; gap:4px;">
-              <button id="btn-admin" class="btn-company active" onclick="handleHeaderCompanyClick('ADMIN')">🏢 Administradora</button>
-              <button id="btn-inmob" class="btn-company" onclick="handleHeaderCompanyClick('INMOB')">🏘️ Inmobiliaria</button>
+          <div id="settings-menu" class="settings-menu hidden" role="menu">
+            <div class="sm-section">
+              <div class="sm-label">Centro de costo</div>
+              <div class="cc-switch">
+                <button type="button" id="cc-admin" class="cc-opt" onclick="switchCostCenter('ADMIN')"><strong><span class="cc-dot"></span>Administradora</strong><small id="cc-admin-st"></small></button>
+                <button type="button" id="cc-inmob" class="cc-opt" onclick="switchCostCenter('INMOB')"><strong><span class="cc-dot"></span>Inmobiliaria</strong><small id="cc-inmob-st"></small></button>
+              </div>
+            </div>
+            <div class="sm-section">
+              <div class="sm-label">Paleta de colores</div>
+              <div class="theme-swatches">
+          <button type="button" class="theme-swatch" data-theme="dark" title="Oscuro" aria-label="Tema Oscuro" style="--sw-bg:#0B1411;--sw-ac:#B39266;" onclick="changeTheme('dark')"></button>
+          <button type="button" class="theme-swatch" data-theme="light" title="Arena" aria-label="Tema Arena" style="--sw-bg:#fdfbf7;--sw-ac:#8c6751;" onclick="changeTheme('light')"></button>
+          <button type="button" class="theme-swatch" data-theme="theme-gray" title="Gris" aria-label="Tema Gris" style="--sw-bg:#F4F5F6;--sw-ac:#4B5563;" onclick="changeTheme('theme-gray')"></button>
+          <button type="button" class="theme-swatch" data-theme="theme-blue" title="Azul" aria-label="Tema Azul" style="--sw-bg:#F0F9FF;--sw-ac:#0284C7;" onclick="changeTheme('theme-blue')"></button>
+          <button type="button" class="theme-swatch" data-theme="theme-pink" title="Rosado" aria-label="Tema Rosado" style="--sw-bg:#FDF2F8;--sw-ac:#DB2777;" onclick="changeTheme('theme-pink')"></button>
+          <button type="button" class="theme-swatch" data-theme="theme-green" title="Verde" aria-label="Tema Verde" style="--sw-bg:#F2F8F5;--sw-ac:#145C34;" onclick="changeTheme('theme-green')"></button>
+              </div>
+            </div>
+            <div class="sm-section">
+              <div class="sm-label">Datos</div>
+              <button type="button" class="sm-item" onclick="triggerUpload('ADMIN')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span>Cargar Excel · Administradora</span></button>
+              <button type="button" class="sm-item" onclick="triggerUpload('INMOB')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span>Cargar Excel · Inmobiliaria</span></button>
+              <button type="button" class="sm-item" onclick="closeSettings(); fetchOCsFromGoogle();" title="Descargar OCs en tránsito directamente desde Google Sheets"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg><span>Sincronizar OC</span></button>
+            </div>
           </div>
-          <div class="divider-v"></div>
-          <div style="display:flex; gap:4px;">
-              <label class="btn-upload" title="Cargar archivo Administradora">
-                  📥 Cargar ADM <input type="file" id="excel-upload-admin" accept=".xlsx, .xls" style="display:none;">
-              </label>
-              <label class="btn-upload" title="Cargar archivo Inmobiliaria">
-                  📥 Cargar INM <input type="file" id="excel-upload-inmob" accept=".xlsx, .xls" style="display:none;">
-              </label>
-              <button class="btn-upload" onclick="fetchOCsFromGoogle()" title="Descargar OCs en tránsito directamente desde Google Sheets" style="background: var(--accent-gold); color: #111; border-color: var(--accent-gold);">
-                  🔄 Sincronizar OC
-              </button>
-              <button class="btn-clear" onclick="clearAllData()" title="Limpiar todos los datos">
-                  🗑️ Limpiar
-              </button>
-          </div>
+        </div>
+        <button class="icon-danger-btn" type="button" onclick="requestClearAllData()" title="Eliminar todos los datos" aria-label="Eliminar todos los datos"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>
       </div>
-      <div id="upload-status">Esperando archivos...</div>
+      <div id="upload-status"></div>
   </div>
 </div>
+
+<!-- ARCHIVOS EXCEL (se abren desde las tarjetas de inicio o desde Ajustes) -->
+<input type="file" id="excel-upload-admin" accept=".xlsx, .xls" class="hidden">
+<input type="file" id="excel-upload-inmob" accept=".xlsx, .xls" class="hidden">
 
 <!-- PANTALLA DE INICIO: SELECCIÓN DE CENTRO DE COSTO Y CARGA AUTOMÁTICA DE EXCEL -->
 <div id="welcome-message">
   <div class="start-screen-box">
-    <h2 id="welcome-title">Selecciona tu Centro de Costo</h2>
-    <div class="start-screen-sub">Elige la unidad operativa para cargar el archivo Excel y comenzar</div>
-    
     <div class="start-cards-grid">
       <!-- TARJETA ADMINISTRADORA -->
-      <div class="start-card" onclick="selectCostCenterAndUpload('ADMIN')">
-        <div class="start-card-icon">🏢</div>
+      <div class="start-card" id="card-admin" role="button" tabindex="0" onclick="selectCostCenterAndUpload('ADMIN')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectCostCenterAndUpload('ADMIN');}">
+        <svg class="start-card-art" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+          <path d="M14 108H114" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+          <rect x="40" y="72" width="8" height="36" rx="2" fill="currentColor" opacity=".75"/>
+          <g fill="currentColor">
+            <circle cx="44" cy="44" r="20"/><circle cx="28" cy="60" r="15"/><circle cx="60" cy="60" r="15"/><circle cx="44" cy="62" r="14"/>
+          </g>
+          <g style="fill:var(--card-bg)" opacity=".28"><circle cx="38" cy="42" r="4"/><circle cx="52" cy="52" r="3"/><circle cx="31" cy="62" r="3"/><circle cx="56" cy="64" r="2.5"/></g>
+          <g fill="currentColor" opacity=".55">
+            <rect x="93" y="96" width="6" height="12" rx="1.5"/>
+            <polygon points="96,44 112,66 80,66"/><polygon points="96,56 116,80 76,80"/><polygon points="96,68 120,96 72,96"/>
+          </g>
+        </svg>
         <div class="start-card-title">Administradora</div>
-        <div class="start-card-desc">Gestión de stock, consumos, alertas logísticas y planificación de Administradora Los Parques.</div>
-        <div class="start-card-cta">📥 Seleccionar y Cargar Excel</div>
-        <button id="btn-restore-admin" class="start-card-memory-btn hidden" onclick="event.stopPropagation(); setEmpresa('ADMIN', true);">
-          📂 Usar datos guardados en memoria
-        </button>
       </div>
 
       <!-- TARJETA INMOBILIARIA -->
-      <div class="start-card" onclick="selectCostCenterAndUpload('INMOB')">
-        <div class="start-card-icon">🏘️</div>
+      <div class="start-card" id="card-inmob" role="button" tabindex="0" onclick="selectCostCenterAndUpload('INMOB')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectCostCenterAndUpload('INMOB');}">
+        <svg class="start-card-art" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+          <rect x="49" y="14" width="30" height="8" rx="4" fill="currentColor"/>
+          <path d="M55 21V36C55 47 36 52 36 68C36 88 50 98 56 104V108H72V104C78 98 92 88 92 68C92 52 73 47 73 36V21Z" fill="currentColor"/>
+          <path d="M55 27C34 26 26 46 39 60" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+          <path d="M73 27C94 26 102 46 89 60" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+          <g style="stroke:var(--card-bg)" stroke-width="3" stroke-linecap="round" opacity=".5">
+            <path d="M56 31H72"/><path d="M37 67C50 73 78 73 91 67"/><path d="M39 81C51 87 77 87 89 81"/>
+          </g>
+        </svg>
         <div class="start-card-title">Inmobiliaria</div>
-        <div class="start-card-desc">Gestión de stock, consumos, alertas logísticas y planificación de Inmobiliaria Los Parques.</div>
-        <div class="start-card-cta">📥 Seleccionar y Cargar Excel</div>
-        <button id="btn-restore-inmob" class="start-card-memory-btn hidden" onclick="event.stopPropagation(); setEmpresa('INMOB', true);">
-          📂 Usar datos guardados en memoria
-        </button>
       </div>
     </div>
   </div>
@@ -1678,6 +1675,20 @@
 
 
 <!-- MODAL FLOTANTE DETALLE PRODUCTO -->
+<!-- CONFIRMACIÓN PARA ELIMINAR TODOS LOS DATOS -->
+<div id="confirm-clear-modal" class="confirm-overlay hidden" onclick="if(event.target===this) closeClearConfirm()">
+  <div class="confirm-box" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-desc">
+    <div class="confirm-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <h3 id="confirm-title">¿Eliminar todos los datos?</h3>
+    <p id="confirm-desc">Se borrarán de la memoria del navegador los Excel de Administradora e Inmobiliaria, las OC sincronizadas, las cantidades del planificador y los productos descontinuados. Esta acción no se puede deshacer.</p>
+    <div class="confirm-actions">
+      <button type="button" id="confirm-cancel" class="cf-btn cf-cancel" onclick="closeClearConfirm()">Cancelar</button>
+      <button type="button" class="cf-btn cf-danger" onclick="confirmClearAllData()">Sí, eliminar</button>
+    </div>
+  </div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
 <div id="product-modal" class="modal-overlay hidden">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1846,7 +1857,7 @@ function updateChartColors() {
     PIE_COLORS[6] = getCssVar('--chart-7', '#fbbf24'); PIE_COLORS[7] = getCssVar('--chart-8', '#2dd4bf'); PIE_COLORS[8] = getCssVar('--chart-9', '#84968C');
     PIE_COLORS[9] = getCssVar('--chart-10', '#E5DECE');
     Chart.defaults.color = getCssVar('--text-muted', '#84968C');
-    Chart.defaults.font.family = "'Nunito', sans-serif";
+    Chart.defaults.font.family = "Calibri, Carlito, 'Segoe UI', Arial, sans-serif";
 }
 
 // GESTIÓN DE LAS 6 PALETAS DE COLORES
@@ -1866,42 +1877,12 @@ function changeTheme(themeName) {
     applyThemeClass(themeName);
     updateChartColors();
     if(PROCESSED_DATA.length > 0) applyGlobalFilters();
+    updateSettingsUI();
 }
 
 function toggleTheme() {
     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
     changeTheme(themes[currentThemeIndex]);
-}
-
-// GESTIÓN DE NIVELES DE CONTRASTE (DALTONISMO Y ALTO CONTRASTE)
-let contrastLevel = parseInt(localStorage.getItem('hubContrastLevel')) || 0;
-function applyContrastMode() {
-    document.body.classList.remove('contrast-1', 'contrast-2');
-    const btn = document.getElementById('btnContrast');
-    if (!btn) return;
-    if (contrastLevel === 1) {
-        document.body.classList.add('contrast-1');
-        btn.style.color = '#ffffff';
-        btn.style.background = '#0055ff';
-        btn.style.borderColor = '#0055ff';
-    } else if (contrastLevel === 2) {
-        document.body.classList.add('contrast-2');
-        btn.style.color = '#00FF00';
-        btn.style.background = '#000000';
-        btn.style.borderColor = '#00FF00';
-    } else {
-        btn.style.color = '';
-        btn.style.background = '';
-        btn.style.borderColor = '';
-    }
-}
-
-function toggleContrastMode() {
-    contrastLevel = (contrastLevel + 1) % 3;
-    localStorage.setItem('hubContrastLevel', contrastLevel);
-    applyContrastMode();
-    updateChartColors();
-    if(PROCESSED_DATA.length > 0) applyGlobalFilters();
 }
 
 function toggleAdvancedCharts() {
@@ -1995,42 +1976,114 @@ function closeModal() {
 /* =====================================================================
    3. PANTALLA DE INICIO, SELECTOR DE EMPRESA Y CONTROLES UI
 ===================================================================== */
-function updateStartScreenMemoryButtons() {
-    const btnAdmin = document.getElementById('btn-restore-admin');
-    const btnInmob = document.getElementById('btn-restore-inmob');
-    if (btnAdmin) btnAdmin.classList.toggle('hidden', !(RAW_EXCEL_ADMIN && RAW_EXCEL_ADMIN.length > 0));
-    if (btnInmob) btnInmob.classList.toggle('hidden', !(RAW_EXCEL_INMOB && RAW_EXCEL_INMOB.length > 0));
+function hasStoredData(empresa) {
+    const d = empresa === 'ADMIN' ? RAW_EXCEL_ADMIN : RAW_EXCEL_INMOB;
+    return !!(d && d.length > 0);
+}
+
+function updateStartScreenMemoryButtons() { updateSettingsUI(); }
+
+function updateSettingsUI() {
+    const mainEl = document.getElementById('main-content');
+    const mainVisible = !!mainEl && !mainEl.classList.contains('hidden');
+    const names = { ADMIN: 'Administradora', INMOB: 'Inmobiliaria' };
+    [['ADMIN', 'admin'], ['INMOB', 'inmob']].forEach(([key, id]) => {
+        const has = hasStoredData(key);
+        const isCurrent = mainVisible && CURRENT_EMPRESA === key;
+        const opt = document.getElementById('cc-' + id);
+        if (opt) {
+            opt.classList.toggle('active', isCurrent);
+            opt.classList.toggle('has-data', has);
+            document.getElementById('cc-' + id + '-st').textContent = isCurrent ? 'En uso' : (has ? 'Datos listos' : 'Cargar Excel');
+        }
+        const card = document.getElementById('card-' + id);
+        if (card) card.title = has ? 'Abrir con los datos guardados' : 'Seleccionar y cargar archivo Excel';
+    });
+    document.querySelectorAll('.theme-swatch').forEach(b => b.classList.toggle('active', b.dataset.theme === themes[currentThemeIndex]));
+    const cc = document.getElementById('header-cc');
+    if (cc) cc.textContent = mainVisible ? names[CURRENT_EMPRESA] : '';
 }
 
 function showStartScreen() {
-    updateStartScreenMemoryButtons();
     document.getElementById('main-content').classList.add('hidden');
     document.getElementById('welcome-message').classList.remove('hidden');
+    document.getElementById('header-sub-row').classList.add('hidden');
+    updateSettingsUI();
 }
 
+// Tarjetas de inicio: si ya hay datos guardados los abre al instante; si no, pide el Excel.
 function selectCostCenterAndUpload(empresa) {
-    CURRENT_EMPRESA = empresa;
-    document.getElementById('btn-admin').classList.toggle('active', empresa === 'ADMIN');
-    document.getElementById('btn-inmob').classList.toggle('active', empresa === 'INMOB');
+    if (hasStoredData(empresa)) { setEmpresa(empresa, true); return; }
     const fileInput = document.getElementById(empresa === 'ADMIN' ? 'excel-upload-admin' : 'excel-upload-inmob');
     if (fileInput) fileInput.click();
 }
 
-function handleHeaderCompanyClick(empresa) {
-    const targetData = empresa === 'ADMIN' ? RAW_EXCEL_ADMIN : RAW_EXCEL_INMOB;
-    if (!targetData || targetData.length === 0) {
-        selectCostCenterAndUpload(empresa);
-    } else {
+/* ---------- MENÚ DE AJUSTES ---------- */
+function toggleSettings(ev) {
+    if (ev) ev.stopPropagation();
+    const menu = document.getElementById('settings-menu');
+    const open = menu.classList.contains('hidden');
+    menu.classList.toggle('hidden', !open);
+    document.getElementById('btn-settings').setAttribute('aria-expanded', String(open));
+    if (open) updateSettingsUI();
+}
+function closeSettings() {
+    const menu = document.getElementById('settings-menu');
+    if (menu) menu.classList.add('hidden');
+    const btn = document.getElementById('btn-settings');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+}
+function triggerUpload(empresa) {
+    closeSettings();
+    const fileInput = document.getElementById(empresa === 'ADMIN' ? 'excel-upload-admin' : 'excel-upload-inmob');
+    if (fileInput) fileInput.click();
+}
+
+// Cambio de centro de costo desde Ajustes: instantáneo si ya hay datos, con transición suave.
+function switchCostCenter(empresa) {
+    closeSettings();
+    const mainEl = document.getElementById('main-content');
+    const mainVisible = !mainEl.classList.contains('hidden');
+    if (!hasStoredData(empresa)) { triggerUpload(empresa); return; }
+    if (mainVisible && CURRENT_EMPRESA === empresa) return;
+    const label = empresa === 'ADMIN' ? 'Administradora' : 'Inmobiliaria';
+    mainEl.classList.add('cc-switching');
+    setTimeout(() => {
         setEmpresa(empresa, true);
-    }
+        requestAnimationFrame(() => mainEl.classList.remove('cc-switching'));
+        showToast('Centro de costo: ' + label);
+    }, 170);
+}
+
+let _toastTimer = null;
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ---------- ELIMINAR DATOS CON CONFIRMACIÓN ---------- */
+function requestClearAllData() {
+    closeSettings();
+    document.getElementById('confirm-clear-modal').classList.remove('hidden');
+    document.getElementById('confirm-cancel').focus();
+}
+function closeClearConfirm() {
+    document.getElementById('confirm-clear-modal').classList.add('hidden');
+}
+function confirmClearAllData() {
+    closeClearConfirm();
+    clearAllData();
+    showToast('Datos eliminados');
 }
 
 function setEmpresa(empresa, force = false) {
    if(CURRENT_EMPRESA === empresa && !force) return;
    CURRENT_EMPRESA = empresa;
    
-   document.getElementById('btn-admin').classList.toggle('active', empresa === 'ADMIN');
-   document.getElementById('btn-inmob').classList.toggle('active', empresa === 'INMOB');
    
    RAW_EXCEL_ROWS = empresa === 'ADMIN' ? RAW_EXCEL_ADMIN : RAW_EXCEL_INMOB;
    PLANNER_DATA = empresa === 'ADMIN' ? PLANNER_DATA_ADMIN : PLANNER_DATA_INMOB;
@@ -2045,7 +2098,7 @@ function setEmpresa(empresa, force = false) {
    if(RAW_EXCEL_ROWS && RAW_EXCEL_ROWS.length > 0) {
        document.getElementById('upload-status').innerHTML = `<span style="color:var(--sys-green)">✅ Memoria activa: ${empresa === 'ADMIN' ? 'Administradora' : 'Inmobiliaria'} (${fmt(RAW_EXCEL_ROWS.length)} reg.)</span>`;
        buildGlobalMetadata(); populateDropdowns(); applyGlobalFilters(); initPlannerDropdowns(); extractPlannerDataFromGlobal();
-       document.getElementById('welcome-message').classList.add('hidden'); document.getElementById('main-content').classList.remove('hidden');
+       document.getElementById('welcome-message').classList.add('hidden'); document.getElementById('main-content').classList.remove('hidden'); document.getElementById('header-sub-row').classList.remove('hidden'); updateSettingsUI();
    } else {
        document.getElementById('upload-status').innerHTML = `<span style="color:var(--text-muted)">Esperando archivo de ${empresa === 'ADMIN' ? 'Administradora' : 'Inmobiliaria'}...</span>`;
        showStartScreen();
@@ -2053,7 +2106,7 @@ function setEmpresa(empresa, force = false) {
 }
 
 function clearAllData() {
-    if(confirm("¿Estás seguro de que deseas limpiar todos los datos, archivos y configuraciones de la memoria?")) {
+    { // La confirmación se solicita en requestClearAllData()
         RAW_EXCEL_ADMIN = []; RAW_EXCEL_INMOB = []; RAW_EXCEL_ROWS = []; PROCESSED_DATA = [];
         PLANNER_DATA_ADMIN = { months: [], records: [], requestedQtys: {} };
         PLANNER_DATA_INMOB = { months: [], records: [], requestedQtys: {} };
@@ -2065,7 +2118,7 @@ function clearAllData() {
         DISCONTINUED_ADMIN = {}; DISCONTINUED_INMOB = {}; PLANNER_DISCONTINUED = {};
         clearDB(); 
         
-        document.getElementById('upload-status').innerHTML = '<span style="color:var(--text-muted)">Datos borrados. Selecciona un centro de costo...</span>';
+        document.getElementById('upload-status').innerHTML = '<span style="color:var(--text-muted)">Datos eliminados.</span>';
         showStartScreen();
     }
 }
@@ -2594,7 +2647,7 @@ function updateDashboardKPIs(processedResult) {
   if(ratioRep > 110 && ratioRep !== '∞') repColor = 'var(--sys-red)'; else if(ratioRep < 90) repColor = 'var(--sys-orange)'; else if(ratioRep >= 90 && ratioRep <= 110) repColor = 'var(--sys-green)'; 
   document.getElementById('kpi-sub-flujo').innerHTML = `Índice de Reposición: <span style="color:${repColor}; font-weight:700;">${ratioRep}%</span>`;
 
-  document.getElementById('welcome-message').classList.add('hidden'); document.getElementById('main-content').classList.remove('hidden');
+  document.getElementById('welcome-message').classList.add('hidden'); document.getElementById('main-content').classList.remove('hidden'); document.getElementById('header-sub-row').classList.remove('hidden'); updateSettingsUI();
 
   renderPieChart('chart-abc', ['Clase A', 'Clase B', 'Clase C'], [valA, valB, valC], [getCssVar('--sys-green'), getCssVar('--sys-yellow'), getCssVar('--text-muted')], false);
 
@@ -2650,8 +2703,8 @@ function updateDashboardKPIs(processedResult) {
                   <td style="padding: 8px 10px; font-weight: 700;">
                       ${i + 1}. <span class="clickable-desc" data-buyer="${b.name}" onclick="openBuyerDetailsModal(this.dataset.buyer)" title="Ver detalle de consumos de ${b.name}">${b.name}</span>
                   </td>
-                  <td style="padding: 8px 10px; text-align: center; font-family: monospace; font-size: 12px;">${fmt(b.cantidad)}</td>
-                  <td style="padding: 8px 10px; text-align: right; color: var(--sys-red); font-weight: 700; font-family: monospace; font-size: 12px;">${fmtCLPFull(b.valor)}</td>
+                  <td style="padding: 8px 10px; text-align: center; font-family: var(--font-num); font-size: 12px;">${fmt(b.cantidad)}</td>
+                  <td style="padding: 8px 10px; text-align: right; color: var(--sys-red); font-weight: 700; font-family: var(--font-num); font-size: 12px;">${fmtCLPFull(b.valor)}</td>
               </tr>
           `).join('');
       } else {
@@ -2711,10 +2764,10 @@ function openBuyerDetailsModal(buyerName) {
     tbody.innerHTML = sortedItems.map((item, i) => `
         <tr>
             <td style="text-align:center; color: var(--text-muted); font-size: 11px;">${i+1}</td>
-            <td style="font-family:monospace; font-weight:700; color:var(--accent-gold);">${item.code}</td>
+            <td style="font-family: var(--font-num); font-weight:700; color:var(--accent-gold);">${item.code}</td>
             <td style="font-size: 11px;" title="${item.desc}">${truncateString(item.desc, 50)}</td>
-            <td style="text-align:right; font-weight:700; font-family:monospace;">${fmt(item.qty)} un.</td>
-            <td style="text-align:right; font-weight:700; font-family:monospace; color: var(--sys-red);">${fmtCLPFull(item.val)}</td>
+            <td style="text-align:right; font-weight:700; font-family: var(--font-num);">${fmt(item.qty)} un.</td>
+            <td style="text-align:right; font-weight:700; font-family: var(--font-num); color: var(--sys-red);">${fmtCLPFull(item.val)}</td>
         </tr>
     `).join('');
     
@@ -2771,10 +2824,10 @@ function openTimelineModal(key, displayLabel) {
         <tr>
             <td style="text-align:center; color: var(--text-muted); font-size: 11px;">${i+1}</td>
             <td style="color: var(--text-muted); font-size: 11px;">${c.dateStr}</td>
-            <td style="font-family:monospace; font-weight:700; color:var(--accent-gold);">${c.code}</td>
+            <td style="font-family: var(--font-num); font-weight:700; color:var(--accent-gold);">${c.code}</td>
             <td style="font-size: 11px;" title="${c.desc}">${truncateString(c.desc, 40)}</td>
             <td style="font-size: 11px; color: var(--text-muted);">${c.doc}</td>
-            <td style="text-align:right; font-weight:700; font-family:monospace; color: var(--sys-red);">${fmt(c.qty)} un.</td>
+            <td style="text-align:right; font-weight:700; font-family: var(--font-num); color: var(--sys-red);">${fmt(c.qty)} un.</td>
         </tr>
     `).join('');
     
@@ -2806,11 +2859,11 @@ function openInTransitDetails(codigo) {
     tbody.innerHTML = orders.map((o) => `
         <tr>
             <td style="font-weight:700; font-size:11px;">${o.empresa}</td>
-            <td style="color:var(--text-muted); font-size:11px; font-family:monospace;">${o.oc}</td>
+            <td style="color:var(--text-muted); font-size:11px; font-family: var(--font-num);">${o.oc}</td>
             <td style="color:var(--text-muted); font-size:11px;">${o.fecha}</td>
-            <td style="text-align:right; font-family:monospace; font-size:11px;">${fmt(o.solicitado)}</td>
-            <td style="text-align:right; font-family:monospace; font-size:11px; color:var(--sys-green);">${fmt(o.recibido)}</td>
-            <td style="text-align:right; font-weight:800; font-family:monospace; color:var(--sys-orange);">${fmt(o.pendiente)}</td>
+            <td style="text-align:right; font-family: var(--font-num); font-size:11px;">${fmt(o.solicitado)}</td>
+            <td style="text-align:right; font-family: var(--font-num); font-size:11px; color:var(--sys-green);">${fmt(o.recibido)}</td>
+            <td style="text-align:right; font-weight:800; font-family: var(--font-num); color:var(--sys-orange);">${fmt(o.pendiente)}</td>
         </tr>
     `).join('');
 
@@ -2845,10 +2898,10 @@ function renderModalTable() {
         
         return `<tr>
             <td style="text-align:center; color: var(--text-muted); font-size: 11px;">${i+1}</td>
-            <td style="font-family:monospace; font-weight:700; color:var(--accent-gold);">${p.codigo}</td>
+            <td style="font-family: var(--font-num); font-weight:700; color:var(--accent-gold);">${p.codigo}</td>
             <td style="font-size: 11px;">${p.descripcion}</td>
             <td style="text-align:right; font-weight:600;">${val3}</td>
-            <td style="text-align:right; font-weight:700; font-family:monospace;">${val4}</td>
+            <td style="text-align:right; font-weight:700; font-family: var(--font-num);">${val4}</td>
         </tr>`;
     }).join('');
     
@@ -3378,7 +3431,7 @@ function processAndRenderPlanner() {
         th.innerHTML = `<tr>
             <th style="width:110px;">Código</th>
             <th style="width:300px;">Descripción Artículo</th>
-            ${PLANNER_DATA.months.map(m => `<th style="width:80px; text-align:right; font-family:monospace; font-size:11px;">${m.label}</th>`).join('')}
+            ${PLANNER_DATA.months.map(m => `<th style="width:80px; text-align:right; font-family: var(--font-num); font-size:11px;">${m.label}</th>`).join('')}
             <th style="width:100px; text-align:right;">Media Mensual<br><span style="font-size:9px;opacity:0.75;">(${numMonths} Meses)</span></th>
             <th style="width:90px; text-align:center;">Frec. Recepción<br><span style="font-size:9px;opacity:0.75;">(Días prom.)</span></th>
             <th style="width:110px; text-align:right;">Sugerido<br><span style="font-size:9px;opacity:0.75;">(${suggestMonths}M + ${safetyMonths}M Seg.)</span></th>
@@ -3393,7 +3446,7 @@ function processAndRenderPlanner() {
     tb.innerHTML = products.map(p => {
         const mCells = PLANNER_DATA.months.map(m => `<td class="pl-month-val">${(p.monthlyConsumptions[m.val] || 0).toLocaleString('es-ES')}</td>`).join('');
         const isUnderStock = p.stock < p.avg;
-        const stockStyle = isUnderStock ? 'color:var(--sys-red); font-weight:800; background:rgba(239, 68, 68, 0.12); padding:2px 6px; border-radius:4px; border:1px solid rgba(239, 68, 68, 0.35);' : 'font-family:monospace; font-weight:600;';
+        const stockStyle = isUnderStock ? 'color:var(--sys-red); font-weight:800; background:rgba(239, 68, 68, 0.12); padding:2px 6px; border-radius:4px; border:1px solid rgba(239, 68, 68, 0.35);' : 'font-family: var(--font-num); font-weight:600;';
         
         const savedQty = (!p.isDiscontinued && PLANNER_DATA.requestedQtys[p.qKey] !== undefined) ? PLANNER_DATA.requestedQtys[p.qKey] : '';
         const avgReceiptStr = p.avgReceiptDays !== null ? `${Math.round(p.avgReceiptDays)} d` : 'N/A';
@@ -3432,7 +3485,7 @@ function processAndRenderPlanner() {
         }
 
         return `<tr class="${rowCls}">
-            <td style="font-family:monospace; font-weight:700; letter-spacing:0.5px;">${p.code}</td>
+            <td style="font-family: var(--font-num); font-weight:700; letter-spacing:0.5px;">${p.code}</td>
             <td>
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
                     <span title="${p.description}">${truncateString(p.description, 40)}</span>
@@ -3441,11 +3494,11 @@ function processAndRenderPlanner() {
             </td>
             ${mCells}
             <td class="pl-prom">${p.avg.toLocaleString('es-ES')}</td>
-            <td style="text-align:center; font-family:monospace; font-size:11px; color:var(--text-muted);">${avgReceiptStr}</td>
+            <td style="text-align:center; font-family: var(--font-num); font-size:11px; color:var(--text-muted);">${avgReceiptStr}</td>
             <td class="pl-sug">${p.sugerido.toLocaleString('es-ES')}</td>
             <td style="text-align:right;"><span style="${stockStyle}">${p.stock.toLocaleString('es-ES')}</span></td>
             
-            <td class="${tdClass}" style="text-align:right; font-family:monospace;" ${tdOnClick} title="${tdTitle}">
+            <td class="${tdClass}" style="text-align:right; font-family: var(--font-num);" ${tdOnClick} title="${tdTitle}">
                 ${trHtml}
             </td>
 
@@ -3750,7 +3803,7 @@ const savedTheme = localStorage.getItem('hubBodegaTheme') || 'dark';
 currentThemeIndex = themes.indexOf(savedTheme);
 if (currentThemeIndex === -1) currentThemeIndex = 0;
 applyThemeClass(themes[currentThemeIndex]);
-applyContrastMode();
+try { localStorage.removeItem('hubContrastLevel'); } catch(e) {}
 updateChartColors();
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -3769,9 +3822,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     showStartScreen();
 
     if ((RAW_EXCEL_ADMIN && RAW_EXCEL_ADMIN.length > 0) || (RAW_EXCEL_INMOB && RAW_EXCEL_INMOB.length > 0)) {
-        document.getElementById('upload-status').innerHTML = `<span style="color:var(--sys-green)">✅ Elige centro de costo para cargar Excel o usar memoria.</span>`;
+        document.getElementById('upload-status').innerHTML = `<span style="color:var(--sys-green)">✅ Datos guardados en memoria.</span>`;
     } else {
-        document.getElementById('upload-status').innerHTML = `<span style="color:var(--text-muted)">Selecciona un centro de costo para adjuntar Excel...</span>`;
+        document.getElementById('upload-status').innerHTML = '';
     }
 
     setInterval(() => {
@@ -3780,6 +3833,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
     }, 300000);
 });
+document.addEventListener('click', ev => { if (!ev.target.closest('#settings-wrap')) closeSettings(); });
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape') { closeSettings(); closeClearConfirm(); } });
+updateSettingsUI();
 </script>
 </body>
 </html>
