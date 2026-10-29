@@ -1,6 +1,7 @@
 # 🔄 Hub Centralizado de Abastecimiento y Compras
 
-*(Coloca aquí una captura de pantalla del panel principal (Dashboard) del Hub, donde se vean las alertas de stock o el estado de los pedidos).*
+<img width="1888" height="868" alt="image" src="https://github.com/user-attachments/assets/07b071ca-20d2-4e05-b480-dfb6eb64e88c" />
+
 
 **Plataforma integral in-house para la gestión end-to-end del ciclo de abastecimiento: desde el análisis de rotación y alertas de quiebre, hasta el seguimiento de órdenes de compra y optimización del flujo de caja.**
 
